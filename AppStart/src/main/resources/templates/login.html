@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+ 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="utf-8" />
+<title>Đăng nhập</title>
+</head>
+<body>
+	<form method="post" th:action="@{/dang-nhap}">
+		<input name="username" type="text" />
+		<input name="password" type="text" />
+		<input type="submit" value="Đăng nhập">
+	</form>
+</body>
+</html>
