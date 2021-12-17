@@ -19,7 +19,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-12">
-					<form th:action="@{/admin/san-pham/them-moi-san-pham}" th:object="${Sach}" enctype="multipart/form-data" method="POST">
+					<form th:action="@{/admin/san-pham/them-moi-san-pham}" th:object="${Sach}" enctype="multipart/form-data" method="POST" id="form">
 					<div class="text-center bold text-center mb-4">
 						<h3>Thêm sản phẩm</h3>
 					</div>
@@ -78,26 +78,38 @@
 						</select>
 					    </div>
 					</div>
-					<div class="row">
+					<!-- <div class="row">
 						<label class="col-sm-2 col-form-label">Hình ảnh</label>
 						<div class="card col-sm-10" style="border: none">
-							<div class="card-header d-flex justify-content-between">
+							<div class="card-header col-12 d-flex justify-content-between">
 								<h4>Image Uploading</h4>
-								<!-- <form class="form" action="#" method="post" id="form"> -->
-								<input type="file" name="Image" id="image" multiple=""
-									class="d-none" onchange="image_select()">
+								<input type="file" name="imagefiles" id="image" multiple
+									class="d-none" onchange="image_select()" accept="image/png, image/jpeg">
 								<button class="btn btn-sm btn-primary" type="button"
 									onclick="document.getElementById('image').click()">Choose
 									Images</button>
-								<!-- </form> -->
 							</div>
-							<div class="card-body d-flex flex-wrap justify-content-start"
-								id="container-image">
-								<!-- Image will be show here-->
+							<span class="text-danger" th:errors="*{imagefiles}"></span>
+							<div class="card-body col-12 d-flex flex-wrap justify-content-start"
+									id="container-image">
+									Image will be show here
 							</div>
 						</div>
-						<span class="text-danger offset-2" th:errors="*{tenSach}"></span>
-					</div>
+					</div> -->
+					<div class="row mb-4">
+							<label class="col-sm-2 col-form-label">Hình ảnh</label>
+							<div class="card col-sm-10" style="border: none">
+								<div class="card-header col-12 d-flex justify-content-between">
+									<h4>Image Uploading</h4>
+									<input type="file" id="file-input" name="imagefiles"
+									accept="image/png, image/jpeg" onchange="preview()" multiple class="d-none">
+									<button class="btn btn-sm btn-primary" type="button"
+									onclick="document.getElementById('file-input').click()">Choose
+									Images</button>
+								</div>
+							<div id="images" class="card-body col-12 d-flex justify-content-start"></div>
+							</div>
+						</div>
 					<div class="text-center">
 					<input class="btn btn-primary" type="submit" value="Thêm mới">
 					</div>
@@ -105,62 +117,52 @@
 				</div>
 
 				<script>
-					var images = [];
-					const image_select = function () {
-						document.getElementById('container-image').innerHTML ="";
-						images = [];
-						  var image = document.getElementById('image').files;
-						  for (i = 0; i < 3; i++) {
-						  	  if (image[i] !== undefined) {
-					      		images.push({
-						  	  	    "name" : image[i].name,
-						  	  	    "url" : URL.createObjectURL(image[i]),
-						  	  	    "file" : image[i],
-						  	    })
-						  	  } else 
-						  	  {
-						  	  	 break;
-						  	  }
-						  }
+				let fileInput = document.getElementById("file-input");
+				let imageContainer = document.getElementById("images");
+				let numOfFiles = document.getElementById("num-of-files");
+				
+				function displayThreeImageIn1Label(imagesLength) {
+					/* let imagesLength = imageContainer.childNodes.length */
+				    const minLength = 3
+				    let updatedLength = 0
+				    if(imagesLength > minLength) {
+				    	updatedLength = imagesLength - minLength
+				    }
+					console.log(updatedLength)
+				    console.log(imagesLength)
+				    if(updatedLength !== 0) {
+				    	for(let i = 0; i < updatedLength; i++) {
+					    	imageContainer.removeChild(imageContainer.getElementsByClassName("image_container")[i+1])
+					    }	
+				    }
+				}
+
+				function preview(){
+				    /* imageContainer.innerHTML = ""; */
+				    /* numOfFiles.textContent = `${fileInput.files.length} Files Selected`; */
+
+				    for(i of fileInput.files){
+				        let reader = new FileReader();
+				        let figure = document.createElement("div");
+				        figure.className = "image_container d-flex justify-content-center position-relative"
+				        let deleteIcon = document.createElement("span");
+				        deleteIcon.className = "position-absolute";
+				        deleteIcon.textContent = "x";
+				        deleteIcon.onclick = function(e) {
+				        	e.currentTarget.parentNode.remove()
+				        }
+				        figure.appendChild(deleteIcon);
+				        reader.onload=()=>{
+				            let img = document.createElement("img");
+				            img.setAttribute("src",reader.result);
+				            figure.insertBefore(img,deleteIcon);
+				        }
+				        imageContainer.appendChild(figure);
+				        reader.readAsDataURL(i);
+				    }
+				    displayThreeImageIn1Label(imageContainer.childNodes.length)
+				}
 					
-						  document.getElementById('form').reset();
-						  document.getElementById('container-image').innerHTML = image_show();
-					}
-					
-					
-					function image_show() {
-					var image = "";
-					images.forEach((i) => {
-					image += `<div class="image_container d-flex justify-content-center position-relative">
-						  	  	  <img src="`+ i.url + `" alt="Image">
-						  	  	  <span class="position-absolute" onclick="delete_image(`+ images.indexOf(i) + `)">&times;</span>
-						  	  </div>`;
-					})
-					return image;
-					}
-					function delete_image(e) {
-					images.splice(e, 1);
-					document.getElementById('container-image').innerHTML = image_show();
-					}
-					function check_duplicate(name) {
-						var image = true;
-						if (images.length > 0) {
-							for (e = 0; e < images.length; e++) {
-								if (images[e].name == name) {
-									image = false;
-									break;
-								}
-							}
-						}
-						return image;
-					}
-					function get_image_data() {
-						var form = new FormData()
-						for (let index = 0; index < images.length; index++) {
-						form.append("file[" + index + "]", images[index]['file']);
-						}
-						return form;
-					} 
 				</script>
 			</div>
 		</div>
