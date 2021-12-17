@@ -78,24 +78,6 @@
 						</select>
 					    </div>
 					</div>
-					<!-- <div class="row">
-						<label class="col-sm-2 col-form-label">Hình ảnh</label>
-						<div class="card col-sm-10" style="border: none">
-							<div class="card-header col-12 d-flex justify-content-between">
-								<h4>Image Uploading</h4>
-								<input type="file" name="imagefiles" id="image" multiple
-									class="d-none" onchange="image_select()" accept="image/png, image/jpeg">
-								<button class="btn btn-sm btn-primary" type="button"
-									onclick="document.getElementById('image').click()">Choose
-									Images</button>
-							</div>
-							<span class="text-danger" th:errors="*{imagefiles}"></span>
-							<div class="card-body col-12 d-flex flex-wrap justify-content-start"
-									id="container-image">
-									Image will be show here
-							</div>
-						</div>
-					</div> -->
 					<div class="row mb-4">
 							<label class="col-sm-2 col-form-label">Hình ảnh</label>
 							<div class="card col-sm-10" style="border: none">
@@ -132,7 +114,7 @@
 				    console.log(imagesLength)
 				    if(updatedLength !== 0) {
 				    	for(let i = 0; i < updatedLength; i++) {
-					    	imageContainer.removeChild(imageContainer.getElementsByClassName("image_container")[i+1])
+					    	imageContainer.removeChild(imageContainer.getElementsByClassName("image_container")[i])
 					    }	
 				    }
 				}

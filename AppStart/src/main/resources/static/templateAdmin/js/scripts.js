@@ -50,3 +50,25 @@ function preview(){
 /*=======*/
 /*}*/
 /*>>>>>>> 077bd355df12fa91e1f00464001cf197e7215f0d*/
+
+const inputs = document.querySelectorAll(".input");
+
+
+function addcl(){
+	let parent = this.parentNode.parentNode;
+	parent.classList.add("focus");
+}
+
+function remcl(){
+	let parent = this.parentNode.parentNode;
+	if(this.value == ""){
+		parent.classList.remove("focus");
+	}
+}
+
+
+inputs.forEach(input => {
+	input.addEventListener("focus", addcl);
+	input.addEventListener("blur", remcl);
+});
+

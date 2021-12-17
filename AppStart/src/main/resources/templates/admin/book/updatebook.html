@@ -96,34 +96,93 @@
 					    </div>
 					</div>
 					<div class="row mb-4">
-						<label class="col-sm-2 col-form-label">Hình ảnh</label>
-						<div class="container-image col-sm-10">
-						<input type="file" id="file-input" name="imagefiles"
-								accept="image/png, image/jpeg" onchange="preview()" multiple/>
-						<div class="row align-items-center">
-								<label for="file-input" class="image-upload col-sm-4" > <i
-								class="fas fa-upload"></i> &nbsp; Choose A Photo</label> 
-								<p style="visibility: hidden;" class="col-sm-7" id="num-of-files">No Files Chosen</p>
-								<span class="text-danger" th:errors="*{imagefiles}"></span>
-						</div>
-						<div id="images">
-						
-							<!-- lúc đầu dùng js click để render ra 3 element figure -->
-							<!-- không cần chọn đã hiển thị rồi, và nếu ông chọn thì code js sẽ xóa 3 cái thẻ -->
-							<figure><img th:src="@{'/admin/san-pham/download?image='+${Sach.getHinhAnh()}}"></figure>
-							<figure><img th:src="@{'/admin/san-pham/download?image='+${Sach.getHinhAnh2()}}"></figure>
-							<figure><img th:src="@{'/admin/san-pham/download?image='+${Sach.getHinhAnh3()}}"></figure>
-							
-							
+							<label class="col-sm-2 col-form-label">Hình ảnh</label>
+							<div class="card col-sm-10" style="border: none">
+								<div class="card-header col-12 d-flex justify-content-between">
+									<h4>Image Uploading</h4>
+									<input type="file" id="file-input" name="imagefiles"
+									accept="image/png, image/jpeg" onchange="preview()" multiple class="d-none">
+									<button class="btn btn-sm btn-primary" type="button"
+									onclick="document.getElementById('file-input').click()">Choose
+									Images</button>
+								</div>
+							<div id="images" class="card-body col-12 d-flex justify-content-start">
+								<div class="image_container d-flex justify-content-center position-relative">
+									<img th:src="@{'/admin/san-pham/download?image='+${Sach.getHinhAnh()}}">
+									<span class="position-absolute temp-delete-ic">x</span>
+								</div>
+								<div class="image_container d-flex justify-content-center position-relative">
+									<img th:src="@{'/admin/san-pham/download?image='+${Sach.getHinhAnh2()}}">
+									<span class="position-absolute temp-delete-ic">x</span>
+								</div>
+								<div class="image_container d-flex justify-content-center position-relative">
+									<img th:src="@{'/admin/san-pham/download?image='+${Sach.getHinhAnh3()}}">
+									<span class="position-absolute temp-delete-ic">x</span>
+								</div>
+							</div>
 							</div>
 						</div>
-					</div>
 					<div class="text-center">
 						<input class="btn btn-primary col-2" type="submit" value="Sửa">
 					</div>
 					<div th:replace="admin/common/footer :: footer"></div>
 				</form>
 				</div>
+				<script>
+				let fileInput = document.getElementById("file-input");
+				let imageContainer = document.getElementById("images");
+				let numOfFiles = document.getElementById("num-of-files");
+				let tempDelIcon = document.querySelectorAll(".temp-delete-ic");
+				
+				function displayThreeImageIn1Label(imagesLength) {
+					/* let imagesLength = imageContainer.childNodes.length */
+				    const minLength = 3
+				    let updatedLength = 0
+				    if(imagesLength > minLength) {
+				    	updatedLength = imagesLength - minLength
+				    }
+					console.log(updatedLength)
+				    console.log(imagesLength)
+				    if(updatedLength !== 0) {
+				    	for(let i = 0; i < updatedLength; i++) {
+					    	imageContainer.removeChild(imageContainer.getElementsByClassName("image_container")[i])
+					    }	
+				    }
+				}
+				
+				tempDelIcon.forEach(el => {
+					el.onclick = function() {
+						el.parentNode.remove()
+					}
+				})
+
+				function preview(){
+				    /* imageContainer.innerHTML = ""; */
+				    /* numOfFiles.textContent = `${fileInput.files.length} Files Selected`; */
+
+				    for(i of fileInput.files){
+				        let reader = new FileReader();
+				        let figure = document.createElement("div");
+				        figure.className = "image_container d-flex justify-content-center position-relative"
+				        let deleteIcon = document.createElement("span");
+				        deleteIcon.className = "position-absolute";
+				        deleteIcon.textContent = "x";
+				        deleteIcon.onclick = function(e) {
+				        	e.currentTarget.parentNode.remove()
+				        };
+				        figure.appendChild(deleteIcon);
+				        reader.onload=()=>{
+				            let img = document.createElement("img");
+				            img.setAttribute("src",reader.result);
+				            figure.insertBefore(img,deleteIcon);
+				        }
+				        imageContainer.appendChild(figure);
+				        reader.readAsDataURL(i);
+				    }
+				    displayThreeImageIn1Label(imageContainer.querySelectorAll("div").length)
+				}
+					
+				</script>
 			</div>
 		</div>
 	</section>

@@ -4,12 +4,44 @@
 <head>
 <meta charset="utf-8" />
 <title>Đăng nhập</title>
+<link th:href="@{/templateAdmin/css/login-form.css}" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
+<script src="https://kit.fontawesome.com/a81368914c.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-	<form method="post" th:action="@{/dang-nhap}">
-		<input name="username" type="text" />
-		<input name="password" type="text" />
-		<input type="submit" value="Đăng nhập">
-	</form>
+	<img class="wave" src="img/wave.png">
+	<div class="container">
+		<div class="img">
+			<img src="img/bg.svg">
+		</div>
+		<div class="login-content">
+			<form method="post" th:action="@{/dang-nhap}">
+				<img src="img/avatar.svg">
+				<h2 class="title">Welcome</h2>
+           		<div class="input-div one">
+           		   <div class="i">
+           		   		<i class="fas fa-user"></i>
+           		   </div>
+           		   <div class="div">
+           		   		<input name="username" type="text" placeholder="Username"/>
+           		   </div>
+           		</div>
+           		<div class="input-div pass">
+           		   <div class="i"> 
+           		    	<i class="fas fa-lock"></i>
+           		   </div>
+           		   <div class="div">
+           		    	<input name="password" type="password" placeholder="Password"/>
+            	   </div>
+            	</div>
+            	<a href="#">Forgot Password?</a>
+            	<input type="submit" class="btn" value="Login">
+            	<!-- <a class="btn" href="#" style="text-align: center; margin-top: auto">
+            		<input type="submit" class="btn" value="Register">
+            	</a> -->
+            </form>
+        </div>
+    </div>
 </body>
 </html>
