@@ -34,13 +34,6 @@
 			<!-- Navbar Search-->
 			<form
 				class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-				<div class="input-group">
-					<input class="form-control" type="text" placeholder="Search for..."
-						aria-label="Search for..." aria-describedby="btnNavbarSearch" />
-					<button class="btn btn-primary" id="btnNavbarSearch" type="button">
-						<i class="fas fa-search"></i>
-					</button>
-				</div>
 			</form>
 			<!-- Navbar-->
 			<ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
@@ -87,29 +80,45 @@
 										th:href="@{/admin/san-pham/them-moi-san-pham}">Thêm mới sản phẩm</a>
 								</nav>
 							</div>
+							<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+								data-bs-target="#collapseUsers" aria-expanded="false"
+								aria-controls="collapseUsers">
+								<div class="sb-nav-link-icon">
+									<i class="fas fa-user"></i>
+								</div> Thành viên 
+								<div class="sb-sidenav-collapse-arrow">
+									<i class="fas fa-angle-down"></i>
+								</div>
+							</a>
+							<div class="collapse" id="collapseUsers"
+								aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
+								<nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+									<a class="nav-link" th:href="@{/admin/thanh-vien/danh-sach-thanh-vien}">Danh sách thành viên</a> 
+									<!-- <a class="nav-link" th:href="@{/admin/san-pham/them-moi-san-pham}">Thêm mới sản phẩm</a> -->
+								</nav>
+							</div>
 							<!-- <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
 								data-bs-target="#collapsePages" aria-expanded="false"
 								aria-controls="collapsePages">
 								<div class="sb-nav-link-icon">
 									<i class="fas fa-book-open"></i>
-								</div> Pages
+								</div> Thành viên
 								<div class="sb-sidenav-collapse-arrow">
 									<i class="fas fa-angle-down"></i>
 								</div>
-							</a>
-							<div class="collapse" id="collapsePages"
+							</a> -->
+							<!-- <div class="collapse" id="collapsePages"
 								aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
-								<nav class="sb-sidenav-menu-nested nav accordion"
-									id="sidenavAccordionPages">
-									<a class="nav-link collapsed" href="#"
+								<nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+									<a class="nav-link" th:href="@{/admin/thanh-vien/danh-sach-thanh-vien}"
 										data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth"
 										aria-expanded="false" aria-controls="pagesCollapseAuth">
-										Authentication
+										Danh sách thành viên
 										<div class="sb-sidenav-collapse-arrow">
 											<i class="fas fa-angle-down"></i>
 										</div>
-									</a>
-									<div class="collapse" id="pagesCollapseAuth"
+									</a> -->
+									<!-- <div class="collapse" id="pagesCollapseAuth"
 										aria-labelledby="headingOne"
 										data-bs-parent="#sidenavAccordionPages">
 										<nav class="sb-sidenav-menu-nested nav">
@@ -146,7 +155,7 @@
 								<div class="sb-nav-link-icon">
 									<i class="fas fa-table"></i>
 								</div> Tables
-							</a>
+							</a> 
 						</div> -->
 					<!-- </div>
 					<div class="sb-sidenav-footer">
