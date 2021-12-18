@@ -17,9 +17,4 @@ public interface ThanhVienRepository extends JpaRepository<Thanhvien, Integer> {
 			Pageable page);
 	@Query("SELECT tv FROM Thanhvien tv WHERE (tv.taiKhoan = :taikhoan)")
 	public Thanhvien getByUsername(@Param("taikhoan") String taikhoan);
-	
-	/*
-	 * @Query("SELECT tv FROM Thanhvien tv JOIN tv.loaithanhvien ltv JOIN ltv.vaitros vt WHERE(vt.)"
-	 * )
-	 */
 }
