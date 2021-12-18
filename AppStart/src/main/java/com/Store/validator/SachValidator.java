@@ -21,9 +21,13 @@ public class SachValidator implements Validator {
 	@Override
 	public void validate(Object target, Errors errors) {
 		SachDTO sach = (SachDTO) target;
-
+		
+		// validate cho tên sách
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "tenSach", "input.require");
-		if (sach.getHinhAnh() == "") {
+		
+		// validate cho imagefiles của sachDTO <=> hinhAnh của sach trong entity
+		if (sach.getHinhAnh() == null) {
+			
 			for (MultipartFile file : sach.getImagefiles()) {
 				if (file.isEmpty()) {
 					errors.rejectValue("imagefiles", "input.img.require");
@@ -31,10 +35,9 @@ public class SachValidator implements Validator {
 				}
 			}
 		}
-		/*
-		 * if (sach.getDonGia() < 0) { errors.rejectValue("password",
-		 * "password.require"); }
-		 */
+		if (sach.getDonGia() < 0) errors.rejectValue("donGia","input.price");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "moTa", "input.require");
+		if (sach.getSoLuongTon() < 0) errors.rejectValue("soLuongTon","input.quantity");
 	}
 
 }
