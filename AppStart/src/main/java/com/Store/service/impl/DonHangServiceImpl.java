@@ -1,7 +1,10 @@
 package com.Store.service.impl;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -59,9 +62,9 @@ public class DonHangServiceImpl implements DonHangService {
 	}
 
 	@Override
-	public List<DonhangDTO> search(String tenkhachhang, String tringtrang, int currentPage, int size) {
+	public List<DonhangDTO> search(String tenkhachhang, String tringtrang, String ngaydat, int currentPage, int size) throws ParseException {
 		List<DonhangDTO> listDonHangDTO = new ArrayList<DonhangDTO>();
-		List<Donhang> listDonHang = donHangRepository.search("%" + tenkhachhang + "%", "%" + tringtrang + "%",
+		List<Donhang> listDonHang = donHangRepository.search("%" + tenkhachhang + "%", "%" + tringtrang + "%", new SimpleDateFormat("yyyy-MM-dd").parse(ngaydat),
 				PageRequest.of(currentPage, size, Sort.by("maDonHang")));
 
 		for (Donhang donHang : listDonHang) {
@@ -77,7 +80,7 @@ public class DonHangServiceImpl implements DonHangService {
 			Khachhang khachHang = donHang.getKhachhang();
 			khachHangDTO.setMaKhachHang(khachHang.getMaKhachHang());
 			khachHangDTO.setTenKhachHang(khachHang.getTenKhachHang());
-			
+
 			/*
 			 * khachHangDTO.setDiaChi(khachHang.getDiaChi());
 			 * khachHangDTO.setEmail(khachHang.getEmail());

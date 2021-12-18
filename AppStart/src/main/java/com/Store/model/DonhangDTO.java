@@ -21,7 +21,7 @@ public class DonhangDTO {
 	public void setMaDonHang(int maDonHang) {
 		this.maDonHang = maDonHang;
 	}
-	public boolean isDaThanhToan() {
+	public boolean getDaThanhToan() {
 		return daThanhToan;
 	}
 	public void setDaThanhToan(boolean daThanhToan) {

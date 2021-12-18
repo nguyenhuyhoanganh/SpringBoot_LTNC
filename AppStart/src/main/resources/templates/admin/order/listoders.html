@@ -4,16 +4,17 @@
 	layout:decorator="admin/common/templateAdmin">
 <head>
 <meta charset="utf-8" />
-<title>Danh Sách Thành Viên</title>
+<title>Danh Sách Đơn Hàng</title>
 <link rel="stylesheet" th:href="@{/css/pagination.css}">
 </head>
 <body>
 	<section layout:fragment="content">
 		<div class="container-fluid">
-			<h3 class="text-center">Danh sách thành viên</h3>
-			<div>
+			<h3 class="text-center">Danh sách đơn hàng</h3>
+
 			<hr />
-				<form class="row">
+			<form>
+				<div class="row">
 					<div class="col-4 search-field">
 						<div class="form-group row">
 							<label class="col-sm-4 col-form-label">Tên Khách Hàng:</label>
@@ -32,78 +33,91 @@
 							</div>
 						</div>
 					</div>
+					<div class="col-4 search-field">
+						<div class="form-group row">
+							<label class="col-sm-4 col-form-label">Đặt Từ Ngày:</label>
+							<div class="col-sm-8">
+								<input class="form-control" type="date" name="ngaydat"
+									th:value="${ngaydat}">
+							</div>
+						</div>
+					</div>
 					<div class="text-center">
 						<button class="btn btn-primary" type="submit">Tìm Kiếm</button>
 					</div>
-			</div>
-			<hr />
-			<div class="row">
-				<div class="col-12">
-					<table class="custom_table text-center" style="width: 100%">
-						<tr>
-							<th>Mã Đơn Hàng</th>
+				</div>
+				<hr />
+				<div class="row">
+					<div class="col-12">
+						<table class="custom_table text-center" style="width: 100%">
+							<tr>
+								<th>Mã Đơn Hàng</th>
 								<th>Khách Hàng</th>
 								<th>Ngày Đặt</th>
 								<th>Ngày Giao</th>
 								<th>Tình Trạng</th>
 								<th>Thanh Toán</th>
 								<th>Chọn</th>
-						</tr>
-		
-						<tr th:each="donhang : ${listDonHangs}">
+							</tr>
+
+							<tr th:each="donhang : ${listDonHangs}">
 								<td th:text="${donhang?.maDonHang}"></td>
 								<td th:text="${donhhang?.maKhachHang}"></td>
 								<td th:text="${donhang?.ngayDat}"></td>
 								<td th:text="${donhang?.ngayGiao}"></td>
 								<td th:text="${donhang?.tinhTrangGiaoHang}"></td>
 								<td th:text="${donhang?.daThanhToan}"></td>
-								<td>
-								<a th:href="@{'/admin/don-hang/thong-tin-don-hang/'+${donhang.maDonHang}}"><i class="far fa-edit edit-icon"></i></a> 
-								<a href="#" data-bs-toggle="modal" th:data-bs-target="@{'#my-modal'+${donhang.maDonHang}}">
-									<i class="fas fa-trash-alt delete-icon"></i>
-								</a>
-							</td>
-							<div th:id="@{'my-modal'+${donhang.maDonHang}}" class="modal" tabindex="-1">
-								<div class="modal-dialog">
-									<div class="modal-content">
-										<div class="modal-header">
-											<h5 class="modal-title">Xóa đơn hàng</h5>
-											<button type="button" class="btn-close"
-												data-bs-dismiss="modal" aria-label="Close"></button>
-										</div >
-										<div th:if="${donhang.daThanhToan} == 'true'">
-											<div class="modal-body">
-												<p>Bạn có chắc chắn muốn xóa đơn hàng mã [[${donhang.maDonHang}]] ?</p>
+								<td><a
+									th:href="@{'/admin/don-hang/thong-tin-don-hang/'+${donhang.maDonHang}}"><i
+										class="far fa-edit edit-icon"></i></a> <a href="#"
+									data-bs-toggle="modal"
+									th:data-bs-target="@{'#my-modal'+${donhang.maDonHang}}"> <i
+										class="fas fa-trash-alt delete-icon"></i>
+								</a></td>
+								<div th:id="@{'my-modal'+${donhang.maDonHang}}" class="modal"
+									tabindex="-1">
+									<div class="modal-dialog">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h5 class="modal-title">Xóa đơn hàng</h5>
+												<button type="button" class="btn-close"
+													data-bs-dismiss="modal" aria-label="Close"></button>
 											</div>
-											<div class="modal-footer">
-												<button type="button" class="btn btn-secondary"
-													data-bs-dismiss="modal">Hủy</button>
-												<a class="btn btn-primary"
-													th:href="@{'/admin/don-hang/xoa-don-hang/'+${donhang?.maDonHang}}">Xóa</a>
+											<div th:if="${donhang?.daThanhToan} == true">
+												<div class="modal-body">
+													<p>Bạn có chắc chắn muốn xóa đơn hàng mã
+														[[${donhang.maDonHang}]] ?</p>
+												</div>
+												<div class="modal-footer">
+													<button type="button" class="btn btn-secondary"
+														data-bs-dismiss="modal">Hủy</button>
+													<a class="btn btn-primary"
+														th:href="@{'/admin/don-hang/xoa-don-hang/'+${donhang?.maDonHang}}">Xóa</a>
+												</div>
 											</div>
-										</div>
-										<div th:if="${donhang.daThanhToan} != true">
-											<div class="modal-body">
-												<p>Đơn hàng mã [[${donhang.maDonHang}]] chưa được thanh toán !</p>
-											</div>
-											<div class="modal-footer justify-content-center">
-												<button type="button" class="btn btn-secondary"
-													data-bs-dismiss="modal">Đã hiểu</button>
+											<div th:if="${donhang?.daThanhToan} != true">
+												<div class="modal-body">
+													<p>Đơn hàng mã [[${donhang.maDonHang}]] chưa được thanh
+														toán !</p>
+												</div>
+												<div class="modal-footer justify-content-center">
+													<button type="button" class="btn btn-secondary"
+														data-bs-dismiss="modal">Đã hiểu</button>
+												</div>
 											</div>
 										</div>
 									</div>
 								</div>
-								</div>
 							</tr>
-					</table>
+						</table>
+					</div>
 				</div>
-			
-			<div class="row mt-4 mb-4">
-				<span class="col-6" style="display: block; text-align: center;">Showing
-					users [[${start}]] to [[${end}]] of [[${totalData}]]</span>
-				<div class="pagination col-6">
+				<div class="row mt-4 mb-4">
+					<span class="col-6" style="display: block; text-align: center;">Showing
+						orders [[${start}]] to [[${end}]] of [[${totalData}]]</span>
+					<div class="pagination col-6">
 
-					<th:block th:if="${totalPage <= 8}">
+						<th:block th:if="${totalPage <= 8}">
 							<a
 								th:href="@{'/admin/don-hang/danh-sach-don-hang?currentPage='+${i}+'&tenkhachhang='+&{tenkhachhang}+'&trangthai='+${trangthai}+'&ngaydat='+${ngaydat}}"
 								th:each="i: ${#numbers.sequence(1, totalPage)}"
@@ -143,11 +157,10 @@
 							<a
 								th:href="@{'/admin/don-hang/danh-sach-don-hang?currentPage='+${currentPage + 4}+'&tenkhachhang='+&{tenkhachhang}+'&trangthai='+${trangthai}+'&ngaydat='+${ngaydat}}">...</a>
 						</th:block>
+					</div>
 				</div>
-			</div>
-			<div th:replace="admin/common/footer :: footer"></div>
-		</form>
-			</div>
+				<div th:replace="admin/common/footer :: footer"></div>
+			</form>
 		</div>
 	</section>
 </body>

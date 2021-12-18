@@ -1,5 +1,6 @@
 package com.Store.service;
 
+import java.text.ParseException;
 import java.util.List;
 
 import com.Store.model.DonhangDTO;
@@ -15,8 +16,7 @@ public interface DonHangService {
 
 	public List<DonhangDTO> getAllDonHang(int currentPage, int size);
 
-	public List<DonhangDTO> search(String tenkhachhang, String tringtrang,
-			int currentPage, int size);
+	public List<DonhangDTO> search(String tenkhachhang, String tringtrang, String ngaydat, int currentPage, int size) throws ParseException;
 
 	long count();
 

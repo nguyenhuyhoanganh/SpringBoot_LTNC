@@ -1,5 +1,6 @@
 package com.Store.controller.admin;
 
+import java.text.ParseException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.Store.model.ChitietdonhangDTO;
 import com.Store.model.DonhangDTO;
 import com.Store.service.DonHangService;
 import com.Store.service.KhachHangService;
@@ -24,19 +26,17 @@ public class DonHangController {
 	KhachHangService khachHangService;
 
 	@GetMapping(value = "danh-sach-don-hang")
-	public String listUsers(HttpServletRequest req, Model model) {
+	public String listUsers(HttpServletRequest req, Model model) throws ParseException {
 		// get parameters for search
 				String tenkhachhang = req.getParameter("tenkhachhang") == null ? "" : req.getParameter("tenkhachhang");
 				String trangthai = req.getParameter("trangthai") == null ? "" : req.getParameter("trangthai");
-				/*
-				 * String ngaydat = req.getParameter("ngaydat") == null ? "2000-01-01" :
-				 * req.getParameter("ngaydat");
-				 */
-
+				String ngaydat = req.getParameter("ngaydat") == null ? "2021-01-01" :
+				req.getParameter("ngaydat");
+				
 				// information of pagination
 				int size = 5;
 				int totalData = donHangService
-						.search(tenkhachhang, trangthai, 0, (int) donHangService.count()).size();
+						.search(tenkhachhang, trangthai, ngaydat, 0, (int) donHangService.count()).size();
 				int totalPage = totalData < 1 ? 1
 						: totalData / size * size < totalData ? totalData / size + 1 : totalData / size;
 				int currentPage = req.getParameter("currentPage") == null ? 1
@@ -48,7 +48,7 @@ public class DonHangController {
 				// set Attribute
 				req.setAttribute("tenkhachhang", tenkhachhang);
 				req.setAttribute("trangthai", trangthai);
-				/* req.setAttribute("ngaydat", ngaydat); */
+				req.setAttribute("ngaydat", ngaydat);
 				
 				req.setAttribute("currentPage", currentPage);
 				req.setAttribute("totalData", totalData);
@@ -57,11 +57,16 @@ public class DonHangController {
 				req.setAttribute("end", end);
 
 				List<DonhangDTO> listDonHangs = donHangService
-						.search(tenkhachhang, trangthai, currentPage - 1, size);
-
+						.search(tenkhachhang, trangthai, ngaydat, currentPage - 1, size);
+				/*
 				for(DonhangDTO donhang : listDonHangs) {
+					System.out.println("Đã thanh toán: "+ donhang.getDaThanhToan());
 					System.out.println("Khách hàng: "+ donhang.getKhachHang().getTenKhachHang());
+					for(ChitietdonhangDTO CTDH : donhang.getChiTietDonHang()) {
+						System.out.println("Chi tiết đơn hàng: "+ CTDH.getMaChiTietDDH() + CTDH.getSoLuong() + CTDH.getTenSach() + CTDH.getDonGia());
+					}
 				}
+				*/
 				
 				model.addAttribute("listDonHangs", listDonHangs);
 				return "admin/order/listoders";
