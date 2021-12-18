@@ -63,7 +63,7 @@ public class SachController {
 				: Long.valueOf(req.getParameter("priceEnd"));
 
 		// information of pagination
-		int size = 2;
+		int size = 5;
 
 		int totalData = sachService
 				.search(tensach, theloai, nxb, nhommua, priceStart, priceEnd, 0, (int) sachService.count()).size();
@@ -111,15 +111,6 @@ public class SachController {
 		return "redirect:/admin/san-pham/danh-sach-san-pham";
 	}
 
-	/*
-	 * @GetMapping(value = "/chi-tiet-san-pham/{bookId}") public String
-	 * detailsBook(HttpServletRequest req, @PathVariable(name = "bookId") int
-	 * bookId) {
-	 * 
-	 * req.setAttribute("book", sachService.getBookById(bookId)); return
-	 * "admin/book/details"; }
-	 */
-
 	@GetMapping(value = "/download")
 	public void download(HttpServletResponse response, @RequestParam("image") String image) {
 		final String uploadFolder = ".\\src\\main\\resources\\static\\img\\";
@@ -150,13 +141,16 @@ public class SachController {
 
 		sachValidator.validate(sach, bindingResult);
 
+		/*kiểm tra trên view cái element có tên imagefiles xem đã input chưa?? */
 		if (bindingResult.hasErrors()) {
+			/* nếu chứ có input */
 			req.setAttribute("TheLoais", theLoaiService.getAll());
 			req.setAttribute("NhomMuas", nhomMuaSevice.getAll());
 			req.setAttribute("NhaXuatBans", nhaXuatBanService.getAll());
 			return "admin/book/addbook";
 		}
-
+		/* đã có input thì sẽ chạy đến*/
+		
 		List<String> fileNames = new ArrayList<String>();
 		for (MultipartFile file : sach.getImagefiles()) {
 
@@ -166,6 +160,8 @@ public class SachController {
 
 			String ext = originalFilename.substring(lastIndex);
 
+			/* không đọc được file ảnh a.png, ...*/
+			
 			String fileName = System.currentTimeMillis() + ext;
 
 			Path uploadPath = Paths.get(".\\src\\main\\resources\\static\\img\\");
