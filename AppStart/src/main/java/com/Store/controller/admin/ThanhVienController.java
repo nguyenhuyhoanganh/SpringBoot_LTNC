@@ -7,9 +7,9 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.Store.model.SachDTO;
 import com.Store.model.ThanhvienDTO;
 import com.Store.service.LoaiThanhVienService;
 import com.Store.service.ThanhVienService;
@@ -66,12 +66,13 @@ public class ThanhVienController {
 	}
 
 	@GetMapping(value = "/thong-tin-thanh-vien/{id}")
-	public String detailsUser() {
+	public String detailsUser(HttpServletRequest req, @PathVariable(name = "id") int id) {
 		return "admin/user/details";
 	}
 
 	@GetMapping(value = "/xoa-thanh-vien/{id}")
-	public String deleteUser() {
-		return "admin/user/details";
+	public String deleteUser(HttpServletRequest req, @PathVariable(name = "id") int id) {
+		thanhVienService.deleteThanhVien(thanhVienService.getThanhVienById(id));
+		return "redirect:/admin/thanh-vien/danh-sach-thanh-vien";
 	}
 }
