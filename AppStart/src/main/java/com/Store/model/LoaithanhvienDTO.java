@@ -1,15 +1,14 @@
 package com.Store.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class LoaithanhvienDTO {
 	private int maLoaiThanhVien;
 	private String tenLoaiThanhVien;
 	private int uuDai;
-
-	public LoaithanhvienDTO() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
+	private List<VaitroDTO> vaiTro;
+	
 	public int getMaLoaiThanhVien() {
 		return maLoaiThanhVien;
 	}
@@ -34,11 +33,26 @@ public class LoaithanhvienDTO {
 		this.uuDai = uuDai;
 	}
 
+	public List<VaitroDTO> getVaiTro() {
+		return vaiTro;
+	}
+
+	public void setVaiTro(List<VaitroDTO> vaiTro) {
+		this.vaiTro = vaiTro;
+	}
+	
+	public LoaithanhvienDTO() {
+		super();
+		this.vaiTro = new ArrayList<VaitroDTO>();
+	}
+
 	public LoaithanhvienDTO(int maLoaiThanhVien, String tenLoaiThanhVien, int uuDai) {
 		super();
 		this.maLoaiThanhVien = maLoaiThanhVien;
 		this.tenLoaiThanhVien = tenLoaiThanhVien;
 		this.uuDai = uuDai;
+		this.vaiTro = new ArrayList<VaitroDTO>();
 	}
+	
 	
 }

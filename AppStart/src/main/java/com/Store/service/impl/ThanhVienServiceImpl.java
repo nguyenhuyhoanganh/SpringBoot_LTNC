@@ -15,6 +15,7 @@ import com.Store.entity.Thanhvien;
 import com.Store.entity.Vaitro;
 import com.Store.model.LoaithanhvienDTO;
 import com.Store.model.ThanhvienDTO;
+import com.Store.model.VaitroDTO;
 import com.Store.repository.ThanhVienRepository;
 import com.Store.service.ThanhVienService;
 
@@ -40,8 +41,6 @@ public class ThanhVienServiceImpl implements ThanhVienService {
 
 		Loaithanhvien loaiThanhVien = new Loaithanhvien();
 		loaiThanhVien.setMaLoaiThanhVien(thanhVienDTO.getLoaiThanhVien().getMaLoaiThanhVien());
-		loaiThanhVien.setTenLoaiThanhVien(thanhVienDTO.getLoaiThanhVien().getTenLoaiThanhVien());
-		loaiThanhVien.setUuDai(thanhVienDTO.getLoaiThanhVien().getUuDai());
 
 		thanhVien.setLoaithanhvien(loaiThanhVien);
 
@@ -62,8 +61,6 @@ public class ThanhVienServiceImpl implements ThanhVienService {
 
 		Loaithanhvien loaiThanhVien = new Loaithanhvien();
 		loaiThanhVien.setMaLoaiThanhVien(thanhVienDTO.getLoaiThanhVien().getMaLoaiThanhVien());
-		loaiThanhVien.setTenLoaiThanhVien(thanhVienDTO.getLoaiThanhVien().getTenLoaiThanhVien());
-		loaiThanhVien.setUuDai(thanhVienDTO.getLoaiThanhVien().getUuDai());
 
 		thanhVien.setLoaithanhvien(loaiThanhVien);
 
@@ -93,7 +90,17 @@ public class ThanhVienServiceImpl implements ThanhVienService {
 		loaiThanhVienDTO.setMaLoaiThanhVien(thanhVien.getLoaithanhvien().getMaLoaiThanhVien());
 		loaiThanhVienDTO.setTenLoaiThanhVien(thanhVien.getLoaithanhvien().getTenLoaiThanhVien());
 		loaiThanhVienDTO.setUuDai(thanhVien.getLoaithanhvien().getUuDai());
-
+		
+		List<Vaitro> listVaiTro = thanhVien.getLoaithanhvien().getVaitros();
+		List<VaitroDTO> listVaiTroDTO = new ArrayList<VaitroDTO>();
+		for(Vaitro vaiTro : listVaiTro) {
+			VaitroDTO vaiTroDTO = new VaitroDTO();
+			vaiTroDTO.setMaVaiTro(vaiTro.getMaVaiTro());
+			vaiTroDTO.setTenVaiTro(vaiTro.getTenVaiTro());
+			listVaiTroDTO.add(vaiTroDTO);
+		}
+		loaiThanhVienDTO.setVaiTro(listVaiTroDTO);
+		
 		thanhVienDTO.setLoaiThanhVien(loaiThanhVienDTO);
 
 		return thanhVienDTO;
@@ -121,6 +128,16 @@ public class ThanhVienServiceImpl implements ThanhVienService {
 			loaiThanhVienDTO.setTenLoaiThanhVien(thanhVien.getLoaithanhvien().getTenLoaiThanhVien());
 			loaiThanhVienDTO.setUuDai(thanhVien.getLoaithanhvien().getUuDai());
 
+			List<Vaitro> listVaiTro = thanhVien.getLoaithanhvien().getVaitros();
+			List<VaitroDTO> listVaiTroDTO = new ArrayList<VaitroDTO>();
+			for(Vaitro vaiTro : listVaiTro) {
+				VaitroDTO vaiTroDTO = new VaitroDTO();
+				vaiTroDTO.setMaVaiTro(vaiTro.getMaVaiTro());
+				vaiTroDTO.setTenVaiTro(vaiTro.getTenVaiTro());
+				listVaiTroDTO.add(vaiTroDTO);
+			}
+			loaiThanhVienDTO.setVaiTro(listVaiTroDTO);
+			
 			thanhVienDTO.setLoaiThanhVien(loaiThanhVienDTO);
 
 			listThanhVienDTO.add(thanhVienDTO);
@@ -135,10 +152,6 @@ public class ThanhVienServiceImpl implements ThanhVienService {
 		
 		List<Thanhvien> listThanhVien = thanhVienRepository.search("%" + tenThanhVien + "%", "%" + loaiThanhVien + "%",
 				page);
-		/*
-		 * List<Thanhvien> listThanhVien = thanhVienRepository
-		 * .findAll(PageRequest.of(currentPage, size, Sort.by("maThanhVien"))).toList();
-		 */
 		for (Thanhvien thanhVien : listThanhVien) {
 			ThanhvienDTO thanhVienDTO = new ThanhvienDTO();
 
@@ -155,6 +168,16 @@ public class ThanhVienServiceImpl implements ThanhVienService {
 			loaiThanhVienDTO.setTenLoaiThanhVien(thanhVien.getLoaithanhvien().getTenLoaiThanhVien());
 			loaiThanhVienDTO.setUuDai(thanhVien.getLoaithanhvien().getUuDai());
 
+			List<Vaitro> listVaiTro = thanhVien.getLoaithanhvien().getVaitros();
+			List<VaitroDTO> listVaiTroDTO = new ArrayList<VaitroDTO>();
+			for(Vaitro vaiTro : listVaiTro) {
+				VaitroDTO vaiTroDTO = new VaitroDTO();
+				vaiTroDTO.setMaVaiTro(vaiTro.getMaVaiTro());
+				vaiTroDTO.setTenVaiTro(vaiTro.getTenVaiTro());
+				listVaiTroDTO.add(vaiTroDTO);
+			}
+			loaiThanhVienDTO.setVaiTro(listVaiTroDTO);
+			
 			thanhVienDTO.setLoaiThanhVien(loaiThanhVienDTO);
 
 			listThanhVienDTO.add(thanhVienDTO);

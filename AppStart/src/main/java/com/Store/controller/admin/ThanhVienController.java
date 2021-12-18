@@ -31,21 +31,17 @@ public class ThanhVienController {
 
 		// information of pagination
 		int size = 5;
-
 		int totalData = thanhVienService
 				.searchThanhVien(tenthanhvien, loaithanhvien, 0, (int) thanhVienService.count()).size();
-
 		int totalPage = totalData < 1 ? 1
 				: totalData / size * size < totalData ? totalData / size + 1 : totalData / size;
-
 		int currentPage = req.getParameter("currentPage") == null ? 1
 				: Integer.parseInt(req.getParameter("currentPage"));
 		currentPage = currentPage < 1 ? 1 : currentPage > totalPage ? totalPage : currentPage;
-
 		int start = (currentPage - 1) * size + 1;
-
 		int end = start + size - 1 < totalData ? start + size - 1 : totalData;
 
+		// set Attribute
 		req.setAttribute("tenthanhvien", tenthanhvien);
 		req.setAttribute("tentaikhoan", tentaikhoan);
 		req.setAttribute("loaithanhvien", loaithanhvien);
@@ -67,6 +63,12 @@ public class ThanhVienController {
 
 	@GetMapping(value = "/thong-tin-thanh-vien/{id}")
 	public String detailsUser(HttpServletRequest req, @PathVariable(name = "id") int id) {
+		req.setAttribute("thanhvien", thanhVienService.getThanhVienById(id));
+		String roles = new String();
+		for(String role : thanhVienService.getRolesByUsername(thanhVienService.getThanhVienById(id).getTaiKhoan())) {
+			roles += role + " "; 
+		}
+		req.setAttribute("roles", roles);
 		return "admin/user/details";
 	}
 

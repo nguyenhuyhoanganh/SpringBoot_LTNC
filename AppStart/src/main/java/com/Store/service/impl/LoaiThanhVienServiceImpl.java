@@ -8,7 +8,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.Store.entity.Loaithanhvien;
+import com.Store.entity.Vaitro;
 import com.Store.model.LoaithanhvienDTO;
+import com.Store.model.VaitroDTO;
 import com.Store.repository.LoaiThanhVienRepository;
 import com.Store.repository.ThanhVienRepository;
 import com.Store.service.LoaiThanhVienService;
@@ -50,6 +52,16 @@ public class LoaiThanhVienServiceImpl implements LoaiThanhVienService {
 		loaiThanhVienDTO.setTenLoaiThanhVien(loaiThanhVien.getTenLoaiThanhVien());
 		loaiThanhVienDTO.setUuDai(loaiThanhVien.getUuDai());
 
+		List<Vaitro> listVaiTro = loaiThanhVien.getVaitros();
+		List<VaitroDTO> listVaiTroDTO = new ArrayList<VaitroDTO>();
+		for(Vaitro vaiTro : listVaiTro) {
+			VaitroDTO vaiTroDTO = new VaitroDTO();
+			vaiTroDTO.setMaVaiTro(vaiTro.getMaVaiTro());
+			vaiTroDTO.setTenVaiTro(vaiTro.getTenVaiTro());
+			listVaiTroDTO.add(vaiTroDTO);
+		}
+		loaiThanhVienDTO.setVaiTro(listVaiTroDTO);
+		
 		return loaiThanhVienDTO;
 	}
 
@@ -66,7 +78,16 @@ public class LoaiThanhVienServiceImpl implements LoaiThanhVienService {
 			loaiThanhVienDTO.setMaLoaiThanhVien(loaiThanhVien.getMaLoaiThanhVien());
 			loaiThanhVienDTO.setTenLoaiThanhVien(loaiThanhVien.getTenLoaiThanhVien());
 			loaiThanhVienDTO.setUuDai(loaiThanhVien.getUuDai());
-
+			
+			List<Vaitro> listVaiTro = loaiThanhVien.getVaitros();
+			List<VaitroDTO> listVaiTroDTO = new ArrayList<VaitroDTO>();
+			for(Vaitro vaiTro : listVaiTro) {
+				VaitroDTO vaiTroDTO = new VaitroDTO();
+				vaiTroDTO.setMaVaiTro(vaiTro.getMaVaiTro());
+				vaiTroDTO.setTenVaiTro(vaiTro.getTenVaiTro());
+				listVaiTroDTO.add(vaiTroDTO);
+			}
+			loaiThanhVienDTO.setVaiTro(listVaiTroDTO);
 			listLoaiThanhVienDTO.add(loaiThanhVienDTO);
 		}
 		return listLoaiThanhVienDTO;
