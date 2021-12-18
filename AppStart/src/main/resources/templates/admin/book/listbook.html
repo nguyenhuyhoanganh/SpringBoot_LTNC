@@ -132,11 +132,11 @@
 							<td th:text="${book.nhaXuatBan.tenNhaXuatBan}"></td>
 							<td>
 								<a th:href="@{'/admin/san-pham/sua-san-pham?maSach='+${book.maSach}}"><i class="far fa-edit edit-icon"></i></a> 
-								<a href="#" data-bs-toggle="modal" data-bs-target="#mymodal">
+								<a href="#" data-bs-toggle="modal" th:data-bs-target="@{'#my-modal'+${book.maSach}}">
 									<i class="fas fa-trash-alt delete-icon"></i>
 								</a>
 							</td>
-							<div id="mymodal" class="modal" tabindex="-1">
+							<div th:id="@{'my-modal'+${book.maSach}}" class="modal" tabindex="-1">
 								<div class="modal-dialog">
 									<div class="modal-content">
 										<div class="modal-header">

@@ -80,11 +80,11 @@
 							<td th:text="${thanhvien.loaiThanhVien.tenLoaiThanhVien}"></td>
 							<td>
 								<a th:href="@{'/admin/thanh-vien/thong-tin-thanh-vien/'+${thanhvien.maThanhVien}}"><i class="far fa-edit edit-icon"></i></a> 
-								<a href="#" data-bs-toggle="modal" data-bs-target="#mymodal">
+								<a href="#" data-bs-toggle="modal" th:data-bs-target="@{'#my-modal'+${thanhvien.maThanhVien}}">
 									<i class="fas fa-trash-alt delete-icon"></i>
 								</a>
 							</td>
-							<div id="mymodal" class="modal" tabindex="-1">
+							<div th:id="@{'my-modal'+${thanhvien.maThanhVien}}" class="modal" tabindex="-1">
 								<div class="modal-dialog">
 									<div class="modal-content">
 										<div class="modal-header">
@@ -113,6 +113,7 @@
 											</div>
 										</div>
 									</div>
+								</div>
 								</div>
 							</tr>
 					</table>
