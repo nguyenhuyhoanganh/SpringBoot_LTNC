@@ -35,6 +35,10 @@
            		    	<input name="password" type="password" placeholder="Password"/>
             	   </div>
             	</div>
+            	
+            	<p th:if = "${error} == 'error'">Tài khoản hoặc mật khẩu không đúng</p>
+            	<p th:if = "${error} == 'deny'">Tài khoản không có quyền truy cập</p>
+            	
             	<a href="#">Forgot Password?</a>
             	<input type="submit" class="btn" value="Login">
             	<!-- <a class="btn" href="#" style="text-align: center; margin-top: auto">

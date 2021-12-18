@@ -15,7 +15,7 @@ public class HelloWorld {
 	}
 	@GetMapping(value = "/dang-nhap")
 	public String login(HttpServletRequest request, @RequestParam(name="error", required = false) String error) {
-		if(error == "error") {
+		if(error != null) {
 			request.setAttribute("error", error);
 		}
 		return "login";
