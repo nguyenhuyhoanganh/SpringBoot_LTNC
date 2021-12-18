@@ -68,6 +68,9 @@ public class ThanhVienController {
 		for(String role : thanhVienService.getRolesByUsername(thanhVienService.getThanhVienById(id).getTaiKhoan())) {
 			roles += role + " "; 
 		}
+		if(req.getParameter("birthday") == null) {
+			System.out.println("Sao đéo có nhỉ???");
+		}else System.out.println(req.getParameter("birthday").toString());
 		req.setAttribute("roles", roles);
 		return "admin/user/details";
 	}

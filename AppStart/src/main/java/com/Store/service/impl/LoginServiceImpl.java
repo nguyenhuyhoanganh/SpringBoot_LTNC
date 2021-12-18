@@ -29,15 +29,12 @@ public class LoginServiceImpl implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		Thanhvien thanhVien = thanhVienRepository.getByUsername(username);
-		System.out.println("username: " + username);
 		if (thanhVien == null) {
 			throw new UsernameNotFoundException("Account " + username + " does not exist");
 		}
-		System.out.println("username: " + thanhVien.getMatKhau());
 		List<String> roles = new ArrayList<String>();
 		for (Vaitro vaiTro : thanhVien.getLoaithanhvien().getVaitros()) {
 			roles.add(vaiTro.getTenVaiTro());
-			System.out.println("roles: " + vaiTro.getTenVaiTro());
 		}
 
 		List<SimpleGrantedAuthority> authorities = new ArrayList<SimpleGrantedAuthority>();
