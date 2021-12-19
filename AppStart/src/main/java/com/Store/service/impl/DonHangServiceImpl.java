@@ -20,7 +20,9 @@ import com.Store.model.ChitietdonhangDTO;
 import com.Store.model.DonhangDTO;
 import com.Store.model.KhachhangDTO;
 import com.Store.model.ThanhvienDTO;
+import com.Store.repository.ChiTietDonHangRepository;
 import com.Store.repository.DonHangRepository;
+import com.Store.repository.KhachHangRepository;
 import com.Store.service.DonHangService;
 
 @Transactional
@@ -28,17 +30,47 @@ import com.Store.service.DonHangService;
 public class DonHangServiceImpl implements DonHangService {
 	@Autowired
 	DonHangRepository donHangRepository;
+	@Autowired
+	KhachHangRepository khachHangRepository;
+	@Autowired
+	ChiTietDonHangRepository chiTietDonHangRepository;
 
 	@Override
 	public void addDonHang(DonhangDTO donhangDTO) {
-		// TODO Auto-generated method stub
-
+		Donhang donhang = new Donhang();
+		
+		donhang.setMaDonHang(donhangDTO.getMaDonHang());
+		donhang.setNgayDat(donhangDTO.getNgayDat());
+		donhang.setNgayGiao(donhangDTO.getNgayGiao());
+		donhang.setDaThanhToan(donhangDTO.getDaThanhToan());
+		donhang.setTinhTrangGiaoHang(donhangDTO.getTinhTrangGiaoHang());
+		donhang.setUuDai(donhangDTO.getUuDai());
+		
+		 /*
+		List<ChitietdonhangDTO> listCTDHDTO = donhangDTO.getChiTietDonHang();
+		List<Chitietdonhang> listCTDH = new ArrayList<Chitietdonhang>();
+		for(ChitietdonhangDTO CTDHDTO : listCTDHDTO) {
+			// có cần chi tiết không ?, chi tiết tạo sau đơn hàng
+			Chitietdonhang CTDH = chiTietDonHangRepository.getById(CTDHDTO.getMaChiTietDDH());	
+			listCTDH.add(CTDH);
+		}
+		donhang.setChiTietDonHangs(listCTDH); 
+		*/
+		
+		KhachhangDTO khachHangDTO = donhangDTO.getKhachHang();
+		Khachhang khachHang = khachHangRepository.getById(khachHangDTO.getMaKhachHang());
+		donhang.setKhachhang(khachHang);
+		
+		donHangRepository.save(donhang);
 	}
 
 	@Override
 	public void updateDonHang(DonhangDTO donhangDTO) {
-		// TODO Auto-generated method stub
-
+		// khách hàng -> đơn hàng -> chi tiết <- sách  
+		// người dùng được sửa ngày đặt, chi tiết
+		// admin được sửa tình trạng, thanh toán, ngày giao
+		
+		
 	}
 
 	@Override
