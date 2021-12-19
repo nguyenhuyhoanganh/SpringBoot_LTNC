@@ -15,9 +15,11 @@ import org.springframework.transaction.annotation.Transactional;
 import com.Store.entity.Chitietdonhang;
 import com.Store.entity.Donhang;
 import com.Store.entity.Khachhang;
+import com.Store.entity.Thanhvien;
 import com.Store.model.ChitietdonhangDTO;
 import com.Store.model.DonhangDTO;
 import com.Store.model.KhachhangDTO;
+import com.Store.model.ThanhvienDTO;
 import com.Store.repository.DonHangRepository;
 import com.Store.service.DonHangService;
 
@@ -46,8 +48,45 @@ public class DonHangServiceImpl implements DonHangService {
 
 	@Override
 	public DonhangDTO getDonHangByID(int maDonhangDTO) {
-		// TODO Auto-generated method stub
-		return null;
+		Donhang donHang = donHangRepository.getById(maDonhangDTO);
+		DonhangDTO donHangDTO = new DonhangDTO();
+		
+		donHangDTO.setDaThanhToan(donHang.getDaThanhToan());
+		donHangDTO.setMaDonHang(donHang.getMaDonHang());
+		donHangDTO.setNgayDat(donHang.getNgayDat());
+		donHangDTO.setNgayGiao(donHang.getNgayGiao());
+		donHangDTO.setTinhTrangGiaoHang(donHang.getTinhTrangGiaoHang());
+		donHangDTO.setUuDai(donHang.getUuDai());
+
+		KhachhangDTO khachHangDTO = new KhachhangDTO();
+		Khachhang khachHang = donHang.getKhachhang();
+		khachHangDTO.setMaKhachHang(khachHang.getMaKhachHang());
+		khachHangDTO.setTenKhachHang(khachHang.getTenKhachHang());
+		khachHangDTO.setDiaChi(khachHang.getDiaChi());
+		khachHangDTO.setEmail(khachHang.getEmail());
+		khachHangDTO.setSoDienThoai(khachHang.getSoDienThoai());
+		
+		Thanhvien thanhVien = khachHang.getThanhvien();
+		ThanhvienDTO thanhVienDTO = new ThanhvienDTO();
+		thanhVienDTO.setMaThanhVien(thanhVien.getMaThanhVien());
+		
+		khachHangDTO.setThanhVien(thanhVienDTO);
+		donHangDTO.setKhachHang(khachHangDTO);
+
+		List<Chitietdonhang> listChiTietDonHang = donHang.getChiTietDonHangs();
+		List<ChitietdonhangDTO> listChiTietDonHangDTO = new ArrayList<ChitietdonhangDTO>();
+		for (Chitietdonhang CTDH : listChiTietDonHang) {
+			ChitietdonhangDTO CTDHDTO = new ChitietdonhangDTO();
+			CTDHDTO.setDonGia(CTDH.getDonGia());
+			CTDHDTO.setMaChiTietDDH(CTDH.getMaChiTietDDH());
+			CTDHDTO.setSoLuong(CTDH.getSoLuong());
+			CTDHDTO.setTenSach(CTDH.getTenSach());
+
+			listChiTietDonHangDTO.add(CTDHDTO);
+		}
+
+		donHangDTO.setChiTietDonHang(listChiTietDonHangDTO);
+		return donHangDTO;
 	}
 
 	@Override

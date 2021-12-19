@@ -74,7 +74,9 @@ public class DonHangController {
 
 	@GetMapping(value = "/thong-tin-don-hang/{id}")
 	public String detailsUser(HttpServletRequest req, @PathVariable(name = "id") int id) {
-		return "";
+		req.setAttribute("donhang", donHangService.getDonHangByID(id));
+		req.setAttribute("chitiets", donHangService.getDonHangByID(id).getChiTietDonHang());
+		return "admin/order/details";
 	}
 
 	@GetMapping(value = "/xoa-don-hang/{id}")
