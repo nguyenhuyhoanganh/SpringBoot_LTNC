@@ -13,7 +13,6 @@ public class DonhangDTO {
 	private int uuDai;
 	private List<ChitietdonhangDTO> chiTietDonHang;
 	private KhachhangDTO khachHang;
-	private String tenKhacHang;
 	
 	public int getMaDonHang() {
 		return maDonHang;
@@ -63,16 +62,8 @@ public class DonhangDTO {
 	public void setKhachHang(KhachhangDTO khachHang) {
 		this.khachHang = khachHang;
 	}
-	
-	
-	public String getTenKhacHang() {
-		return tenKhacHang;
-	}
-	public void setTenKhacHang(String tenKhacHang) {
-		this.tenKhacHang = tenKhacHang;
-	}
 	public DonhangDTO(int maDonHang, boolean daThanhToan, Date ngayDat, Date ngayGiao, String tinhTrangGiaoHang,
-			int uuDai, String tenKhacHang) {
+			int uuDai) {
 		super();
 		this.maDonHang = maDonHang;
 		this.daThanhToan = daThanhToan;
@@ -80,7 +71,6 @@ public class DonhangDTO {
 		this.ngayGiao = ngayGiao;
 		this.tinhTrangGiaoHang = tinhTrangGiaoHang;
 		this.uuDai = uuDai;
-		this.tenKhacHang = tenKhacHang;
 		this.chiTietDonHang = new ArrayList<ChitietdonhangDTO>();
 		this.khachHang = new KhachhangDTO();
 	}

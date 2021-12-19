@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.Store.model.ChitietdonhangDTO;
 import com.Store.model.DonhangDTO;
 import com.Store.service.DonHangService;
 import com.Store.service.KhachHangService;
@@ -65,6 +64,7 @@ public class DonHangController {
 					for(ChitietdonhangDTO CTDH : donhang.getChiTietDonHang()) {
 						System.out.println("Chi tiết đơn hàng: "+ CTDH.getMaChiTietDDH() + CTDH.getSoLuong() + CTDH.getTenSach() + CTDH.getDonGia());
 					}
+					donhang.setTenKhachHang(donhang.getKhachHang().getTenKhachHang());
 				}
 				*/
 				

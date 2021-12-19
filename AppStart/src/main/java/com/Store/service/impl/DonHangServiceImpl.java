@@ -69,6 +69,7 @@ public class DonHangServiceImpl implements DonHangService {
 
 		for (Donhang donHang : listDonHang) {
 			DonhangDTO donHangDTO = new DonhangDTO();
+			
 			donHangDTO.setDaThanhToan(donHang.getDaThanhToan());
 			donHangDTO.setMaDonHang(donHang.getMaDonHang());
 			donHangDTO.setNgayDat(donHang.getNgayDat());
@@ -80,13 +81,9 @@ public class DonHangServiceImpl implements DonHangService {
 			Khachhang khachHang = donHang.getKhachhang();
 			khachHangDTO.setMaKhachHang(khachHang.getMaKhachHang());
 			khachHangDTO.setTenKhachHang(khachHang.getTenKhachHang());
-
-			/*
-			 * khachHangDTO.setDiaChi(khachHang.getDiaChi());
-			 * khachHangDTO.setEmail(khachHang.getEmail());
-			 * khachHangDTO.setSoDienThoai(khachHang.getSoDienThoai());
-			 */
-			donHangDTO.setTenKhacHang(khachHang.getTenKhachHang());
+			khachHangDTO.setDiaChi(khachHang.getDiaChi());
+			khachHangDTO.setEmail(khachHang.getEmail());
+			khachHangDTO.setSoDienThoai(khachHang.getSoDienThoai());
 
 			donHangDTO.setKhachHang(khachHangDTO);
 

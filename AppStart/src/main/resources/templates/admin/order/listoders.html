@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorator="admin/common/templateAdmin">
+	layout:decorate="admin/common/templateAdmin">
 <head>
 <meta charset="utf-8" />
 <title>Danh Sách Đơn Hàng</title>
@@ -62,7 +62,7 @@
 
 							<tr th:each="donhang : ${listDonHangs}">
 								<td th:text="${donhang?.maDonHang}"></td>
-								<td th:text="${donhhang?.maKhachHang}"></td>
+								<td th:text="${donhang.getKhachHang().getTenKhachHang()}"></td>
 								<td th:text="${donhang?.ngayDat}"></td>
 								<td th:text="${donhang?.ngayGiao}"></td>
 								<td th:text="${donhang?.tinhTrangGiaoHang}"></td>
