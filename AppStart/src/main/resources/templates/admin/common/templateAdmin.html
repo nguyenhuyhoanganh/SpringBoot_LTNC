@@ -97,6 +97,23 @@
 									<!-- <a class="nav-link" th:href="@{/admin/san-pham/them-moi-san-pham}">Thêm mới sản phẩm</a> -->
 								</nav>
 							</div>
+							<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+								data-bs-target="#collapseOrders" aria-expanded="false"
+								aria-controls="collapseOrders">
+								<div class="sb-nav-link-icon">
+									<i class="fas fa-file-invoice-dollar"></i>
+								</div> Hóa đơn 
+								<div class="sb-sidenav-collapse-arrow">
+									<i class="fas fa-angle-down"></i>
+								</div>
+							</a>
+							<div class="collapse" id="collapseOrders"
+								aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
+								<nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+									<a class="nav-link" th:href="@{/admin/don-hang/danh-sach-don-hang}">Danh sách hóa đơn</a> 
+									<!-- <a class="nav-link" th:href="@{/admin/san-pham/them-moi-san-pham}">Thêm mới sản phẩm</a> -->
+								</nav>
+							</div>
 							<!-- <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
 								data-bs-target="#collapsePages" aria-expanded="false"
 								aria-controls="collapsePages">

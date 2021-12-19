@@ -22,147 +22,150 @@
 	<section layout:fragment="content">
 		<div class="container">
 			<div class="row">
-				<div class="col-12">
-					<div class="bold text-left mb-4">
-						<h3>Đơn hàng mã [[${donhang.maDonHang}]]</h3>
-					</div>
-					<div class="mb-3 row">
-						<div class="row col-4">
-							<label for="id" class="col-sm-5 col-form-label">ID:</label>
-							<div class="col-sm-7">
-								<input type="text" th:value="${donhang.maDonHang}" readonly
-									class="form-control-plaintext" id="id" />
-							</div>
+				<div class="col-6">
+					<h3 class="mb-4">Thông tin khách hàng</h3>
+					<div class="row align-items-center mb-3">
+						<div class="col-1 text-center">
+							<i class="fas fa-user fa-2x"></i>
 						</div>
-						<div class="row col-4">
-							<label for="ngaydat" class="col-sm-5 col-form-label">Ngày Đặt:</label>
-							<div class="col-sm-7">
-								<input type="text" th:value="${donhang.ngayDat}" readonly
-									class="form-control-plaintext" id="ngaydat" />
-							</div>
-						</div>
-						<div class="row col-4">
-							<label for="ngaygiao" class="col-sm-5 col-form-label">Ngày Giao:</label>
-							<div class="col-sm-7">
-								<input type="text" th:value="${donhang.ngayGiao}" readonly
-									class="form-control-plaintext" id="ngaygiao" />
-							</div>
+						<div class="col-8">
+							<p class="customer-field" style="margin: 0; text-align: left">ID
+								Khách Hàng</p>
+							<span class="customer-value">[[${donhang.getKhachHang().getTenKhachHang()}]]</span>
 						</div>
 					</div>
-					<div class="mb-3 row">
-						<div class="row col-4">
-							<label for="tinhtrang" class="col-sm-5 col-form-label">Tình Trạng:</label>
-							<div class="col-sm-7">
-								<input type="text" th:value="${donhang.tinhTrangGiaoHang}" readonly
-									class="form-control-plaintext" id="tinhtrang" />
-							</div>
+					<hr />
+					<div class="row align-items-center mb-3">
+						<div class="col-1 text-center">
+							<i class="fas fa-user fa-2x"></i>
 						</div>
-						<div class="row col-4">
-							<label for="thanhtoan" class="col-sm-5 col-form-label">Thanh Toán:</label>
-							<div th:if="${donhang?.daThanhToan} == true" class="col-sm-7">
-								<input type="text" value="Đã thanh toán" readonly
-									class="form-control-plaintext" id="thanhtoan" />
-							</div>
-							<div th:if="${donhang?.daThanhToan} != true" class="col-sm-7">
-								<input type="text" value="Chưa được thanh toán" readonly
-									class="form-control-plaintext" id="thanhtoan" />
-							</div>
-						</div>
-						<div class="row col-4">
-							<label for="uudai" class="col-sm-5 col-form-label">Ưu Đãi:</label>
-							<div class="col-sm-7">
-								<input type="text" th:value="${donhang.uuDai} + '%'" readonly
-									class="form-control-plaintext" id="uudai" />
-							</div>
+						<div class="col-8">
+							<p class="customer-field" style="margin: 0; text-align: left">ID
+								Thành Viên</p>
+							<span class="customer-value">[[${donhang.getKhachHang().getThanhVien().getMaThanhVien()}]]</span>
 						</div>
 					</div>
-					<div class="bold text-left mb-4">
-						<h3>Thông tin khách hàng</h3>
-					</div>
-					<div class="mb-3 row">
-						<div class="row col-4">
-							<label for="idkh" class="col-sm-5 col-form-label">ID Khách Hàng:</label>
-							<div class="col-sm-7">
-								<input type="text" th:value="${donhang.getKhachHang().getMaKhachHang()}" readonly
-									class="form-control-plaintext" id="idkh" />
-							</div>
+					<hr />
+					<div class="row align-items-center mb-3">
+						<div class="col-1 text-center">
+							<i class="fas fa-user fa-2x"></i>
 						</div>
-						<div class="row col-4">
-							<label for="idthanhvien" class="col-sm-5 col-form-label">ID Thành Viên:</label>
-							<div th:if="${donhang.getKhachHang().getThanhVien().getMaThanhVien()} == null" class="col-sm-7">
-								<input type="text" value="Chưa đăng ký thành viên" readonly
-									class="form-control-plaintext" id="idthanhvien" />
-							</div>
-							<div th:if="${donhang.getKhachHang().getThanhVien().getMaThanhVien()} != null" class="col-sm-7">
-								<input type="text" th:value="${donhang.getKhachHang().getThanhVien().getMaThanhVien()}" readonly
-									class="form-control-plaintext" id="idthanhvien" />
-							</div>
-						</div>
-						<div class="row col-4">
-							<label for="hoten" class="col-sm-5 col-form-label">Họ Tên:</label>
-							<div class="col-sm-7">
-								<input type="text" th:value="${donhang.getKhachHang().getTenKhachHang()}" readonly
-									class="form-control-plaintext" id="hoten" />
-							</div>
+						<div class="col-8">
+							<p class="customer-field" style="margin: 0; text-align: left">Họ
+								và tên</p>
+							<span class="customer-value">[[${donhang.getKhachHang().getTenKhachHang()}]]</span>
 						</div>
 					</div>
-					<div class="mb-3 row">
-						<div class="row col-4">
-							<label for="email" class="col-sm-5 col-form-label">Email:</label>
-							<div class="col-sm-7">
-								<input type="text" th:value="${donhang.getKhachHang().getEmail()}" readonly
-									class="form-control-plaintext" id="email" />
-							</div>
+					<hr />
+					<div class="row align-items-center mb-3">
+						<div class="col-1 text-center">
+							<i class="fas fa-user fa-2x"></i>
 						</div>
-						<div class="row col-4">
-							<label for="diachi" class="col-sm-5 col-form-label">Địa Chỉ:</label>
-							<div class="col-sm-7">
-								<input type="text" th:value="${donhang.getKhachHang().getDiaChi()}" readonly
-									class="form-control-plaintext" id="diachi" />
-							</div>
-						</div>
-						<div class="row col-4">
-							<label for="sdt" class="col-sm-5 col-form-label">Số Điện Thoại:</label>
-							<div class="col-sm-7">
-								<input type="text" th:value="${donhang.getKhachHang().getSoDienThoai()}" readonly
-									class="form-control-plaintext" id="sdt" />
-							</div>
+						<div class="col-8">
+							<p class="customer-field" style="margin: 0; text-align: left">Email
+							</p>
+							<span class="customer-value">[[${donhang.getKhachHang().getEmail()}]]</span>
 						</div>
 					</div>
-					<div class="bold text-left mb-4">
-						<h3>Chi tiết đơn hàng</h3>
-					</div>
-					<div th:each="chitiet : ${chitiets}" class="mb-3 row">
-						<div class="row col-4">
-							<label class="col-sm-5 col-form-label">Tên Sách:</label>
-							<div class="col-sm-7">
-								<input type="text" th:value="${chitiet.getTenSach()}" readonly
-									class="form-control-plaintext" />
-							</div>
+					<hr />
+					<div class="row align-items-center mb-3">
+						<div class="col-1 text-center">
+							<i class="fas fa-user fa-2x"></i>
 						</div>
-						<div class="row col-4">
-							<label class="col-sm-5 col-form-label">Số Lượng:</label>
-							<div class="col-sm-7">
-								<input type="text" th:value="${chitiet.getSoLuong()}" readonly
-									class="form-control-plaintext"/>
-							</div>
-						</div>
-						<div class="row col-4">
-							<label class="col-sm-5 col-form-label">Đơn Giá:</label>
-							<div class="col-sm-7">
-								<input type="text" th:value="${chitiet.getDonGia()} + ' VNĐ'" readonly
-									class="form-control-plaintext" />
-							</div>
+						<div class="col-8">
+							<p class="customer-field" style="margin: 0; text-align: left">Địa
+								chỉ</p>
+							<span class="customer-value">[[${donhang.getKhachHang().getDiaChi()}]]</span>
 						</div>
 					</div>
-					<div class="text-left">
-						<a class="btn btn-info col-2"
-							href="/Store/admin/don-hang/danh-sach-don-hang">Quay lại</a>
+					<hr />
+					<div class="row align-items-center mb-3">
+						<div class="col-1 text-center">
+							<i class="fas fa-user fa-2x"></i>
+						</div>
+						<div class="col-8">
+							<p class="customer-field" style="margin: 0; text-align: left">Số
+								điện thoại</p>
+							<span class="customer-value">[[${donhang.getKhachHang().getSoDienThoai()}]]</span>
+						</div>
 					</div>
-					<div th:replace="admin/common/footer :: footer"></div>
+					<hr />
+				</div>
+				<div class="col-6">
+					<h3 class="mb-4">Thông tin đơn hàng</h3>
+					<div class="row align-items-center mb-3">
+						<div class="col-1 text-center">
+							<i class="fas fa-user fa-2x"></i>
+						</div>
+						<div class="col-8">
+							<p class="customer-field" style="margin: 0; text-align: left">ID
+								Đơn hàng</p>
+							<span class="customer-value">[[${donhang.maDonHang}]]</span>
+						</div>
+					</div>
+					<hr />
+					<div class="row align-items-center mb-3">
+						<div class="col-1 text-center">
+							<i class="fas fa-user fa-2x"></i>
+						</div>
+						<div class="col-8">
+							<p class="customer-field" style="margin: 0; text-align: left">Ngày đặt</p>
+							<span class="customer-value">[[${donhang.ngayDat}]]</span>
+						</div>
+					</div>
+					<hr />
+					<div class="row align-items-center mb-3">
+						<div class="col-1 text-center">
+							<i class="fas fa-user fa-2x"></i>
+						</div>
+						<div class="col-8">
+							<p class="customer-field" style="margin: 0; text-align: left">Ngày giao</p>
+							<span class="customer-value">[[${donhang.ngayGiao}]]</span>
+						</div>
+					</div>
+					<hr />
+					<div class="row align-items-center mb-3">
+						<div class="col-1 text-center">
+							<i class="fas fa-user fa-2x"></i>
+						</div>
+						<div class="col-8">
+							<p class="customer-field" style="margin: 0; text-align: left">Tình trạng</p>
+							<span class="customer-value" th:if="${donhang?.daThanhToan} == true" >Đã giao</span>
+							<span class="customer-value" th:if="${donhang?.daThanhToan} == false" >Chờ giao hàng</span>
+						</div>
+					</div>
+					<hr />
+					<div class="row align-items-center mb-3">
+						<div class="col-1 text-center">
+							<i class="fas fa-user fa-2x"></i>
+						</div>
+						<div class="col-8">
+							<p class="customer-field" style="margin: 0; text-align: left">Thanh toán
+							</p>
+							<span class="customer-value" th:if="${donhang?.daThanhToan} == true" >Đã thanh toán</span>
+							<span class="customer-value" th:if="${donhang?.daThanhToan} == false" >Chưa thanh toán</span>
+						</div>
+					</div>
+					<hr />
+					<div class="row align-items-center mb-3">
+						<div class="col-1 text-center">
+							<i class="fas fa-user fa-2x"></i>
+						</div>
+						<div class="col-8">
+							<p class="customer-field" style="margin: 0; text-align: left">Ưu đãi
+								</p>
+							<span class="customer-value">[[${donhang.uuDai}]]%</span>
+						</div>
+					</div>
+					<hr />
 				</div>
 			</div>
+			<div class="text-center">
+				<h3 class="mb-4">Chi tiết đơn hàng</h3>
+
+			</div>
 		</div>
+		<div th:replace="admin/common/footer :: footer"></div>
 	</section>
 
 </body>

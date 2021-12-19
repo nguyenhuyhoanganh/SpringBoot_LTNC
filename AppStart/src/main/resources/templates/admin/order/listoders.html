@@ -66,7 +66,8 @@
 								<td th:text="${donhang?.ngayDat}"></td>
 								<td th:text="${donhang?.ngayGiao}"></td>
 								<td th:text="${donhang?.tinhTrangGiaoHang}"></td>
-								<td th:text="${donhang?.daThanhToan}"></td>
+								<td th:if="${donhang?.daThanhToan} == true">Đã thanh toán</td>
+								<td th:if="${donhang?.daThanhToan} == false">Chờ giao hàng</td>
 								<td><a
 									th:href="@{'/admin/don-hang/thong-tin-don-hang/'+${donhang.maDonHang}}"><i
 										class="far fa-edit edit-icon"></i></a> <a href="#"
@@ -159,9 +160,9 @@
 						</th:block>
 					</div>
 				</div>
-				<div th:replace="admin/common/footer :: footer"></div>
 			</form>
 		</div>
+		<div th:replace="admin/common/footer :: footer"></div>
 	</section>
 </body>
 </html>
