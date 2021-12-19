@@ -21,7 +21,103 @@
 <body>
 	<section layout:fragment="content">
 		<div class="container">
-			<div class="row">
+			<h3 class="text-center">Thành Viên [[${thanhvien.hoTen}]]</h3>
+			<hr />
+			<div class="box-content">
+				<div>
+					<div class="row align-items-center mb-3">
+						<div class="col-1 text-center">
+							<i class="fas fa-user fa-2x"></i>
+						</div>
+						<div class="col-8">
+							<p class="customer-field" style="margin: 0; text-align: left">Họ
+								và tên</p>
+							<span class="customer-value">[[${thanhvien.hoTen}]]</span>
+						</div>
+						<div class="col-3">
+							<button type="button" class="btn btn-outline-info">Chỉnh
+								sửa</button>
+						</div>
+					</div>
+					<hr />
+					<div class="row align-items-center mb-3">
+						<div class="col-1 text-center">
+							<i class="fas fa-heart fa-2x"></i>
+						</div>
+						<div class="col-8">
+							<p class="customer-field" style="margin: 0; text-align: left">Tên
+								tài khoản</p>
+							<span class="customer-value">[[${thanhvien.taiKhoan}]]</span>
+						</div>
+						<div class="col-3">
+							<button type="button" class="btn btn-outline-info">Chỉnh
+								sửa</button>
+						</div>
+					</div>
+					<hr />
+					<div class="row align-items-center mb-3">
+						<div class="col-1 text-center">
+							<i class="fas fa-mobile fa-2x"></i>
+						</div>
+						<div class="col-8">
+							<p class="customer-field" style="margin: 0; text-align: left">Số
+								điện thoại</p>
+							<span class="customer-value">[[${thanhvien.soDienThoai}]]</span>
+						</div>
+						<div class="col-3">
+							<button type="button" class="btn btn-outline-info">Chỉnh
+								sửa</button>
+						</div>
+					</div>
+					<hr />
+					<div class="row align-items-center mb-3">
+						<div class="col-1 text-center">
+							<i class="fas fa-address-book fa-2x"></i>
+						</div>
+						<div class="col-8">
+							<p class="customer-field" style="margin: 0; text-align: left">Địa chỉ</p>
+<!-- 								chỉ</p> -->
+							<span class="customer-value">[[${thanhvien.diaChi}]]</span>
+						</div>
+						<div class="col-3">
+							<button type="button" class="btn btn-outline-info">Chỉnh
+								sửa</button>
+						</div>
+					</div>
+					<hr />
+					<div class="row align-items-center mb-3">
+						<div class="col-1 text-center">
+							<i class="fas fa-cart-arrow-down fa-2x"></i>
+						</div>
+						<div class="col-8">
+							<p class="customer-field" style="margin: 0; text-align: left">Ưu
+								đãi</p>
+							<span class="customer-value"></span>
+						</div>
+						<div class="col-3">
+							<button type="button" class="btn btn-outline-info">Chỉnh
+								sửa</button>
+						</div>
+					</div>
+					<hr />
+					<div class="row align-items-center mb-3">
+						<div class="col-1 text-center">
+							<i class="fas fa-user fa-2x"></i>
+						</div>
+						<div class="col-8">
+							<p class="customer-field" style="margin: 0; text-align: left">Tên
+								loại thành viên</p>
+							<span class="customer-value">[[${thanhvien.loaiThanhVien.tenLoaiThanhVien}]]</span>
+						</div>
+						<div class="col-3">
+							<button type="button" class="btn btn-outline-info">Chỉnh
+								sửa</button>
+						</div>
+					</div>
+					<hr />
+				</div>
+			</div>
+			<!-- <div class="row">
 				<div class="col-12">
 					<div class="text-center bold text-center mb-4">
 						<h3>Thành Viên [[${thanhvien.hoTen}]]</h3>
@@ -108,7 +204,7 @@
 					</div>
 					<div th:replace="admin/common/footer :: footer"></div>
 				</div>
-			</div>
+			</div>-->		
 		</div>
 	</section>
 
