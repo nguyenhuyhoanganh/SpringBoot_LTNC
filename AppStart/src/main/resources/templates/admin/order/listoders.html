@@ -69,8 +69,7 @@
 								<td th:if="${donhang?.daThanhToan} == true">Đã thanh toán</td>
 								<td th:if="${donhang?.daThanhToan} == false">Chờ giao hàng</td>
 								<td><a
-									th:href="@{'/admin/don-hang/thong-tin-don-hang/'+${donhang.maDonHang}}"><i
-										class="far fa-edit edit-icon"></i></a> <a href="#"
+									th:href="@{'/admin/don-hang/thong-tin-don-hang/'+${donhang.maDonHang}}"><i class="fas fa-eye"></i></a> <a href="#"
 									data-bs-toggle="modal"
 									th:data-bs-target="@{'#my-modal'+${donhang.maDonHang}}"> <i
 										class="fas fa-trash-alt delete-icon"></i>
