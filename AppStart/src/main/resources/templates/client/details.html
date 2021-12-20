@@ -2,12 +2,22 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorator="client/common/templateClient">
-<html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" th:href="@{/css/product-item.css}">
 <title>Thông tin chi tiết</title>
+<script src="https://cdn.tiny.cloud/1/2mxsxulxmdqvlr9jnx0cii9sz96jwsyqbahtu3gars8e7kp6/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+<script>
+      tinymce.init({
+        selector: '#mytextarea',
+        menubar:false,
+        statusbar: false,
+        toolbar: false,
+        width: "1036",
+        height: "300",
+      });
+</script>
 </head>
 <body>
 	<section layout:fragment="content">
@@ -146,7 +156,7 @@
 								<div class="tab-pane fade show active ml-3" id="nav-gioithieu"
 									role="tabpanel" aria-labelledby="nav-gioithieu-tab">
 									<h6 class="tieude font-weight-bold">[[${sach.tenSach}]]</h6>
-									<p>[[${sach.moTa}]]</p>
+									<textarea rows="" cols="" id="mytextarea">[[${sach.moTa}]]</textarea>
 								</div>
 								<div class="tab-pane fade" id="nav-danhgia" role="tabpanel"
 									aria-labelledby="nav-danhgia-tab">
@@ -255,5 +265,15 @@
 		<!-- het product-page -->
 		<div th:replace="client/common/footer :: footer"></div>
 	</section>
+	<script>
+		tinymce
+				.init({
+					selector : 'textarea',
+					plugins : 'advlist autolink lists link image charmap print preview hr anchor pagebreak',
+					toolbar_mode : 'floating',
+					entity_encoding : "raw",
+					encoding : "UTF-8",
+				});
+	</script>
 </body>
 </html>

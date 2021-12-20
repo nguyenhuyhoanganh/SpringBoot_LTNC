@@ -32,12 +32,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	
 	@Override
 	public void configure(WebSecurity web) throws Exception {
-		web.ignoring().antMatchers("/css/**", "/img/**", "/js/**", "/templateAdmin/**");
+		web.ignoring().antMatchers("/css/**", "/img/**", "/js/**", "/templateAdmin/**", "/images/**");
 	}
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.cors().disable().csrf().disable().authorizeRequests().antMatchers("/danh-sach-san-pham").permitAll().antMatchers("/tim-kiem").permitAll()
+		http.cors().disable().csrf().disable().authorizeRequests().antMatchers("/danh-sach-san-pham").permitAll().antMatchers("/tim-kiem").permitAll().antMatchers("/san-pham/").permitAll()
 		.antMatchers("/admin").hasRole("ADMIN").anyRequest().
 		authenticated().and().formLogin().loginPage("/dang-nhap").loginProcessingUrl("/dang-nhap").defaultSuccessUrl("/admin/san-pham/danh-sach-san-pham").failureUrl("/dang-nhap?error=error").permitAll().
 		and().logout().permitAll().and().exceptionHandling().accessDeniedPage("/dang-nhap?/error=deny");

@@ -27,10 +27,8 @@
 									<a th:href="@{'/san-pham/'+${book.maSach}}" class="motsanpham"
 										style="text-decoration: none; color: black;"
 										data-toggle="tooltip" data-placement="bottom"
-										title="Lập Kế Hoạch Kinh Doanh Hiệu Quả"> <img
-										class="card-img-top anh"
-										th:src="@{'/admin/san-pham/download?image='+${book.getHinhAnh()}}"
-										th:alt="@{book.tenSach}">
+										title="Lập Kế Hoạch Kinh Doanh Hiệu Quả"> <img th:src="@{'/admin/san-pham/download?image='+${book.getHinhAnh()}}"
+										class="card-img-top anh" th:alt="@{book.tenSach}">
 										<div class="card-body noidungsp mt-3">
 											<h6 class="card-title ten">[[${book.tenSach}]]</h6>
 											<!-- <small class="tacgia text-muted">Brian Finch</small> -->
@@ -54,39 +52,44 @@
 							<nav>
 								<ul class="pagination justify-content-center">
 									<th:block th:if="${totalPage <= 8}">
-										<a th:href="@{'/danh-sach-san-pham?currentPage='+${i}}"
+										<a
+											th:href="@{'/tim-kiem?currentPage='+${i}+'&tensach='+${tensach}+'&theloai='+${theloai}+'&nhommua='+${nhommua}}"
 											th:each="i: ${#numbers.sequence(1, totalPage)}"
-											th:class="${currentPage == i ? 'active' : ''}"
-											class="page-link">[[${i}]]</a>
+											th:class="${currentPage == i ? 'active' : ''}">[[${i}]]</a>
 									</th:block>
 									<th:block th:if="${totalPage > 8}">
-										<a th:href="@{'/danh-sach-san-pham?currentPage=1'}"
+										<a
+											th:href="@{'/tim-kiem?currentPage=1'+'&tensach='+${tensach}+'&theloai='+${theloai}+'&nhommua='+${nhommua}}"
 											th:class="${currentPage == 1 ? 'disbale' : ''}">&laquo;</a>
 										<th:block
 											th:if="${currentPage <= 4 || currentPage > totalPage - 3}">
-											<a th:href="@{'/danh-sach-san-pham?currentPage='+${i}}"
+											<a
+												th:href="@{'/tim-kiem?currentPage='+${i}+'&tensach='+${tensach}+'&theloai='+${theloai}+'&nhommua='+${nhommua}}"
 												th:each="i: ${#numbers.sequence(1, 5)}"
 												th:class="${currentPage == i ? 'active' : ''}">[[${i}]]</a>
-											<a th:href="@{'/danh-sach-san-pham?currentPage=5'}">...</a>
-											<a th:href="@{'danh-sach-san-pham?currentPage='+${i}"
+											<a
+												th:href="@{'/tim-kiem?currentPage=5'+'&tensach='+${tensach}+'&theloai='+${theloai}+'&nhommua='+${nhommua}}">...</a>
+											<a
+												th:href="@{'/tim-kiem?currentPage='+${i}+'&tensach='+${tensach}+'&theloai='+${theloai}+'&nhommua='+${nhommua}}"
 												th:each="i: ${#numbers.sequence(totalPage - 3, totalPage)}"
 												th:class="${currentPage == i ? 'active' : ''}">[[${i}]]</a>
 										</th:block>
 										<a
-											th:href="@{'/danh-sach-san-pham?currentPage='+${totalPage}}"
+											th:href="@{'/tim-kiem?currentPage='+${totalPage}+'&tensach='+${tensach}+'&theloai='+${theloai}+'&nhommua='+${nhommua}}"
 											th:class="${currentPage == totalPage ? 'disbale' : ''}">&raquo;</a>
 									</th:block>
 
 									<th:block
 										th:if="${currentPage > 4 && currentPage < totalPage - 3}">
 										<a
-											th:href="@{'/danh-sach-san-pham?currentPage='+${currentPage - 4}}">...</a>
+											th:href="@{'/tim-kiem?currentPage='+${currentPage - 4}+'&tensach='+${tensach}+'&theloai='+${theloai}+'&nhommua='+${nhommua}}">...</a>
 
-										<a th:href="@{'/danh-sach-san-pham?currentPage='+${i}}"
+										<a
+											th:href="@{'/tim-kiem?currentPage='+${i}+'&tensach='+${tensach}+'&theloai='+${theloai}+'&nhommua='+${nhommua}}"
 											th:each="i: ${#numbers.sequence(currentPage - 3, currentPage + 3)}"
 											th:class="${currentPage == i ? 'active' : ''}">[[${i}]]</a>
 										<a
-											th:href="@{'/danh-sach-san-pham?currentPage='+${currentPage + 4}}">...</a>
+											th:href="@{'/tim-kiem?currentPage='+${currentPage + 4}+'&tensach='+${tensach}+'&theloai='+${theloai}+'&nhommua='+${nhommua}}">...</a>
 									</th:block>
 								</ul>
 							</nav>
