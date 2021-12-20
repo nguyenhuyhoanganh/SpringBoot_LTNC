@@ -107,6 +107,12 @@ public class HomeController {
 	
 	@GetMapping(value = "/san-pham/{bookId}")
 	public String deletesBook(HttpServletRequest req, @PathVariable(name = "bookId") int bookId) {
+		req.setAttribute("NhomMuas", nhomMuaSevice.getAll());
+		Set<SachDTO> theloaiSachs = new HashSet<SachDTO>(); 
+		for(SachDTO book : sachService.getAllBook(0, (int) sachService.count())) {
+			theloaiSachs.add(book);
+		}
+		req.setAttribute("theloais", theloaiSachs);
 		req.setAttribute("masach", bookId);
 		req.setAttribute("sach", sachService.getBookById(bookId));
 		return "client/details";
