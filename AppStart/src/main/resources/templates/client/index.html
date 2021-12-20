@@ -3,6 +3,7 @@
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorator="client/common/templateClient">
 <head>
+	<meta charset="UTF-8">
 	<title>Danh sách sản phẩm</title>
 </head>
 
@@ -30,7 +31,7 @@
 									title="Lập Kế Hoạch Kinh Doanh Hiệu Quả"> <img
 									class="card-img-top anh"
 									th:src="@{'/admin/san-pham/download?image='+${book.getHinhAnh()}}"
-									th:alt="@{book.tenSach}">
+									th:alt="${book.tenSach}">
 									<div class="card-body noidungsp mt-3">
 										<h6 class="card-title ten">[[${book.tenSach}]]</h6>
 										<!-- <small class="tacgia text-muted">Brian Finch</small> -->
