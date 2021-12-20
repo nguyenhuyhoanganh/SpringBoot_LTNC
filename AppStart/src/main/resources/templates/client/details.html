@@ -25,21 +25,25 @@
 						<div class="col-md-5 khoianh">
 							<div class="anhto mb-4">
 								<a class="active"
-									th:href="@{'/img/'+${sach.getHinhAnh()}}"
+									th:href="@{'/admin/san-pham/download?image='+${sach.getHinhAnh()}}"
 									data-fancybox="thumb-img"> <img class="product-image"
-									th:src="@{'/img/'+${sach.getHinhAnh()}}"
+									th:src="@{'/admin/san-pham/download?image='+${sach.getHinhAnh()}}"
 									th:alt="${sach.tenSach}" style="width: 100%;">
-								</a> <a th:href="@{'/img/'+${sach.getHinhAnh()}}"
+								</a> <a
+									th:href="@{'/admin/san-pham/download?image='+${sach.getHinhAnh()}}"
 									data-fancybox="thumb-img"></a>
 							</div>
 							<div class="list-anhchitiet d-flex mb-4"
 								style="margin-left: 2rem;">
 								<img class="thumb-img thumb1 mr-3 img-fluid"
-									th:src="@{'/img/'+${sach.getHinhAnh()}}"
-									alt="lap-ke-hoach-kinh-doanh-hieu-qua-mt"> <img
+									th:src="@{'/admin/san-pham/download?image='+${sach.getHinhAnh()}}"
+									alt="${sach.tenSach}"> <img
+									class="thumb-img thumb1 mr-3 img-fluid"
+									th:src="@{'/admin/san-pham/download?image='+${sach.getHinhAnh2()}}"
+									alt="${sach.tenSach}"> <img
 									class="thumb-img thumb2 img-fluid"
-									th:src="@{'/img/'+${sach.getHinhAnh2()}}"
-									alt="lap-ke-hoach-kinh-doanh-hieu-qua-ms">
+									th:src="@{'/admin/san-pham/download?image='+${sach.getHinhAnh3()}}"
+									alt="${sach.tenSach}">
 							</div>
 						</div>
 						<!-- thông tin sản phẩm: tên, giá bìa giá bán tiết kiệm, các khuyến mãi, nút chọn mua.... -->
@@ -59,9 +63,12 @@
 										<!-- <div class="giabia">
 											Giá của cuốn sách:<span class="giamoi ml-2">139.000 ₫</span>
 										</div> -->
-										<div class="giaban d-flex align-items-center justify-content-center">
-											<span>Giá bán tại BookXYZ:</span> <span class="giamoi font-weight-bold ml-2" style="position: inherit">[[${sach.donGia}]]
-											</span><span class="donvitien" style="position: inherit">₫</span>
+										<div
+											class="giaban d-flex align-items-center justify-content-center">
+											<span>Giá bán tại BookXYZ:</span> <span
+												class="giamoi font-weight-bold ml-2"
+												style="position: inherit">[[${sach.donGia}]] </span><span
+												class="donvitien" style="position: inherit">₫</span>
 										</div>
 										<!-- <div class="tietkiem">
 											Tiết kiệm: <b>27.800 ₫</b> <span class="sale">-20%</span>
@@ -81,7 +88,8 @@
 										</ul>
 									</div>
 									<div class="soluong d-flex text-center">
-										<div class="input-number input-group mb-3 justify-content-center">
+										<div
+											class="input-number input-group mb-3 justify-content-center">
 											<label class="font-weight-bold">Số lượng: </label>
 											<div class="input-group-prepend">
 												<span class="input-group-text btn-spin btn-dec">-</span>
@@ -126,7 +134,8 @@
 									<a class="nav-item nav-link active text-uppercase"
 										id="nav-gioithieu-tab" data-toggle="tab" href="#nav-gioithieu"
 										role="tab" aria-controls="nav-gioithieu" aria-selected="true">Giới
-										thiệu</a> <!-- <a class="nav-item nav-link text-uppercase"
+										thiệu</a>
+									<!-- <a class="nav-item nav-link text-uppercase"
 										id="nav-danhgia-tab" data-toggle="tab" href="#nav-danhgia"
 										role="tab" aria-controls="nav-danhgia" aria-selected="false">Đánh
 										giá của độc giả</a> -->
