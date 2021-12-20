@@ -1,80 +1,115 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="client/common/templateClient">
 <head>
-<meta charset="utf-8" />
-<title>Title</title>
-<link rel="stylesheet" th:href="@{/css/pagination.css}">
+	<title>Danh sách sản phẩm</title>
 </head>
-<body>
-	<p>==============================TÌM KIẾM THEO TÊN==================================</p>
-	<form th:action="@{/tim-kiem}" method="GET">
-		<input type="text" name="tensach" th:value="${tensach}"
-			placeholder="Nhập tên sách">
-		<button type="submit">Tìm Kiếm</button>
-	</form>
-	<p>==============================LỌC THEO NHÓM MUA - THỂ LOẠI===========================================</p>
-	<!-- Đây là filer: (do CSDL thiết kế sida, nên cố gắng khi thêm sách sao cho 1 nhóm mua có nhiều thể loại, 1 thể loại có 1 nhóm mua duy nhất) -->
-	<!-- Đây là filer: (do CSDL thiết kế sida, nên cố gắng khi thêm sách sao cho 1 nhóm mua có nhiều thể loại, 1 thể loại có 1 nhóm mua duy nhất) -->
-	<ul>
 
-		<!-- Lọc nhóm mua -->
-		<li th:each="nhommua : ${NhomMuas}"><a
-			th:href="'tim-kiem?nhommua=' + ${nhommua.tenNhom}">[[${nhommua.tenNhom}]]</a>
-			<ul>
+<section layout:fragment="content">
+	<!-- ảnh banner -->
+	<section class="banner">
+		<div class="container">
+			<a href="sach-moi-tuyen-chon.html"><img
+				th:src="@{/images/sach-moi-full-banner.jpg}"
+				alt="sach-moi-full-banner" class="img-fluid"></a>
+		</div>
+	</section>
 
-				<!-- Lọc thể loại theo nhóm mua -->
-				<li th:each="theloai : ${theloais}"
-					th:if="${theloai.nhomMua.tenNhom} == ${nhommua.tenNhom}"><a
-					th:href="'tim-kiem?nhommua=' + ${nhommua.tenNhom} + '&theloai=' + ${theloai.theLoai.tenTheLoai}">[[${theloai.theLoai.tenTheLoai}]]</a>
-				</li>
-			</ul></li>
-	</ul>
+	<!-- các sản phẩm  -->
+	<section class="content my-4">
+		<div class="container">
+			<div class="noidung bg-white" style="width: 100%;">
+				<div class="items">
+					<div class="row">
+						<div class="col-lg-3 col-md-4 col-xs-6" th:each="book : ${books}">
+							<div class="card">
+								<a th:href="@{'/san-pham/'+${book.maSach}}" class="motsanpham"
+									style="text-decoration: none; color: black;"
+									data-toggle="tooltip" data-placement="bottom"
+									title="Lập Kế Hoạch Kinh Doanh Hiệu Quả"> <img
+									class="card-img-top anh"
+									th:src="@{'/img/'+${book.getHinhAnh()}}"
+									th:alt="@{book.tenSach}">
+									<div class="card-body noidungsp mt-3">
+										<h6 class="card-title ten">[[${book.tenSach}]]</h6>
+										<!-- <small class="tacgia text-muted">Brian Finch</small> -->
+										<div class="gia d-flex align-items-baseline">
+											<div class="giamoi">[[${book.donGia}]] VNĐ</div>
+											<!-- <div class="giacu text-muted">139.000 ₫</div> -->
+											<!-- <div class="sale">-20%</div> -->
+										</div>
+										<!-- <div class="danhgia">
+												<ul class="d-flex" style="list-style: none;">
+													<li class="active"><i class="fa fa-star"></i></li>
+													<li class="active"><i class="fa fa-star"></i></li>
+													<li class="active"><i class="fa fa-star"></i></li>
+													<li class="active"><i class="fa fa-star"></i></li>
+													<li><i class="fa fa-star"></i></li>
+													<span class="text-muted">0 nhận xét</span>
+												</ul>
+											</div> -->
+									</div>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 
-	<p>=============================LẶP LẤY TỪNG SẢN PHẨM========================</p>
-	<!-- lặp sách như đối với listsach -->
-	
-	<!-- xem chi tiết sách như đối với details của user -->
-	
-			th:href="@{'/san-pham/'+${book.maSach}}"  : link xem chi tiết
-			
-			
-	<!-- đường dẫn là /danh-sach-san-pham -->
-	<p>=============================PHÂN TRANG VỚI TRANG DANH-SACH-SAN-PHAM=======================================</p>
+			<!-- pagination bar  -->
+			<div class="pagination-bar my-3">
+				<div class="row text-center">
+					<div class="col-12">
+						<nav>
+							<ul class="pagination justify-content-center">
+								<th:block th:if="${totalPage <= 8}">
+									<a th:href="@{'/danh-sach-san-pham?currentPage='+${i}}"
+										th:each="i: ${#numbers.sequence(1, totalPage)}"
+										th:class="${currentPage == i ? 'active' : ''}"
+										class="page-link">[[${i}]]</a>
+								</th:block>
+								<th:block th:if="${totalPage > 8}">
+									<a th:href="@{'/danh-sach-san-pham?currentPage=1'}"
+										th:class="${currentPage == 1 ? 'disbale' : ''}">&laquo;</a>
+									<th:block
+										th:if="${currentPage <= 4 || currentPage > totalPage - 3}">
+										<a th:href="@{'/danh-sach-san-pham?currentPage='+${i}}"
+											th:each="i: ${#numbers.sequence(1, 5)}"
+											th:class="${currentPage == i ? 'active' : ''}">[[${i}]]</a>
+										<a th:href="@{'/danh-sach-san-pham?currentPage=5'}">...</a>
+										<a th:href="@{'danh-sach-san-pham?currentPage='+${i}"
+											th:each="i: ${#numbers.sequence(totalPage - 3, totalPage)}"
+											th:class="${currentPage == i ? 'active' : ''}">[[${i}]]</a>
+									</th:block>
+									<a th:href="@{'/danh-sach-san-pham?currentPage='+${totalPage}}"
+										th:class="${currentPage == totalPage ? 'disbale' : ''}">&raquo;</a>
+								</th:block>
 
+								<th:block
+									th:if="${currentPage > 4 && currentPage < totalPage - 3}">
+									<a
+										th:href="@{'/danh-sach-san-pham?currentPage='+${currentPage - 4}}">...</a>
 
-	<!-- phân trang -->
-	<div class="pagination col-6">
+									<a th:href="@{'/danh-sach-san-pham?currentPage='+${i}}"
+										th:each="i: ${#numbers.sequence(currentPage - 3, currentPage + 3)}"
+										th:class="${currentPage == i ? 'active' : ''}">[[${i}]]</a>
+									<a
+										th:href="@{'/danh-sach-san-pham?currentPage='+${currentPage + 4}}">...</a>
+								</th:block>
+							</ul>
+						</nav>
+					</div>
+				</div>
+			</div>
 
-		<th:block th:if="${totalPage <= 8}">
-			<a th:href="@{'/danh-sach-san-pham?currentPage='+${i}}"
-				th:each="i: ${#numbers.sequence(1, totalPage)}"
-				th:class="${currentPage == i ? 'active' : ''}">[[${i}]]</a>
-		</th:block>
-		<th:block th:if="${totalPage > 8}">
-			<a th:href="@{'/danh-sach-san-pham?currentPage=1'}"
-				th:class="${currentPage == 1 ? 'disbale' : ''}">&laquo;</a>
-			<th:block th:if="${currentPage <= 4 || currentPage > totalPage - 3}">
-				<a th:href="@{'/danh-sach-san-pham?currentPage='+${i}}"
-					th:each="i: ${#numbers.sequence(1, 5)}"
-					th:class="${currentPage == i ? 'active' : ''}">[[${i}]]</a>
-				<a th:href="@{'/danh-sach-san-pham?currentPage=5'}">...</a>
-				<a th:href="@{'danh-sach-san-pham?currentPage='+${i}"
-					th:each="i: ${#numbers.sequence(totalPage - 3, totalPage)}"
-					th:class="${currentPage == i ? 'active' : ''}">[[${i}]]</a>
-			</th:block>
-			<a th:href="@{'/danh-sach-san-pham?currentPage='+${totalPage}}"
-				th:class="${currentPage == totalPage ? 'disbale' : ''}">&raquo;</a>
-		</th:block>
-
-		<th:block th:if="${currentPage > 4 && currentPage < totalPage - 3}">
-			<a th:href="@{'/danh-sach-san-pham?currentPage='+${currentPage - 4}}">...</a>
-
-			<a th:href="@{'/danh-sach-san-pham?currentPage='+${i}}"
-				th:each="i: ${#numbers.sequence(currentPage - 3, currentPage + 3)}"
-				th:class="${currentPage == i ? 'active' : ''}">[[${i}]]</a>
-			<a th:href="@{'/danh-sach-san-pham?currentPage='+${currentPage + 4}}">...</a>
-		</th:block>
-	</div>
-
+			<!--het khoi san pham-->
+		</div>
+		<!--het div noidung-->
+		</div>
+		<!--het container-->
+	</section>
+	<div th:replace="client/common/footer :: footer"></div>
+</section>
 </body>
 </html>

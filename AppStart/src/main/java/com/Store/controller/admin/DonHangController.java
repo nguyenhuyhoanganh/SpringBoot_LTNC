@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.Store.entity.Chitietdonhang;
+import com.Store.model.ChitietdonhangDTO;
 import com.Store.model.DonhangDTO;
 import com.Store.service.DonHangService;
 import com.Store.service.KhachHangService;
@@ -76,6 +78,11 @@ public class DonHangController {
 	public String detailsUser(HttpServletRequest req, @PathVariable(name = "id") int id) {
 		req.setAttribute("donhang", donHangService.getDonHangByID(id));
 		req.setAttribute("chitiets", donHangService.getDonHangByID(id).getChiTietDonHang());
+		for(ChitietdonhangDTO chitiet : donHangService.getDonHangByID(id).getChiTietDonHang()) {
+			System.out.println("Tên: "+ chitiet.getTenSach());
+			System.out.println("Đơn Giá: "+ chitiet.getDonGia());
+			System.out.println("Số lượng: "+ chitiet.getSoLuong());
+		}
 		return "admin/order/details";
 	}
 

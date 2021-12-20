@@ -30,7 +30,7 @@ public class HomeController {
 
 	@GetMapping(value = "/danh-sach-san-pham")
 	public String getListBook(HttpServletRequest req) {
-		int size = 5;
+		int size = 12;
 		int totalData = sachService.getAllBook(0, (int) sachService.count()).size();
 		int totalPage = totalData < 1 ? 1
 				: totalData / size * size < totalData ? totalData / size + 1 : totalData / size;
@@ -109,6 +109,6 @@ public class HomeController {
 	public String deletesBook(HttpServletRequest req, @PathVariable(name = "bookId") int bookId) {
 		req.setAttribute("masach", bookId);
 		req.setAttribute("sach", sachService.getBookById(bookId));
-		return "redirect:/admin/san-pham/danh-sach-san-pham";
+		return "client/details";
 	}
 }

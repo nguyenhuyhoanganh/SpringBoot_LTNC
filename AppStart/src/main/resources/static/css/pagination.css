@@ -11,9 +11,9 @@
 }
 
 .pagination a.active {
-	background-color: rgb(255, 128, 128);
+	background-color: #F5A623;
 	color: white;
-	border: 1px solid rgb(255, 128, 128);
+	border: 1px solid #F5A623;
 }
 
 .pagination a:hover:not(.active) {
@@ -47,7 +47,7 @@
   	height: 60px;
   	line-height: 60px;
   	text-align: center;
-  	background-color: rgb(255, 128, 128);
+  	background-color: #F5A623;
 	color: white;
   	border: solid 1px lightgray;
 }

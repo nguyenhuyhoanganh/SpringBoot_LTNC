@@ -160,9 +160,39 @@
 					<hr />
 				</div>
 			</div>
-			<div class="text-center">
-				<h3 class="mb-4">Chi tiết đơn hàng</h3>
-
+				<h3 class="mb-4 text-center">Chi tiết đơn hàng</h3>
+			<div class="text-center" th:each="chitiet : ${chitiets}">
+				<div class="row align-items-center mb-3">
+					<div class="col-1 text-center">
+						<i class="fas fa-user fa-2x"></i>
+					</div>
+					<div class="col-8">
+						<p class="customer-field" style="margin: 0; text-align: left">Tên
+							sách</p>
+						<span class="customer-value" style="float: left">[[${chitiet.getTenSach()}]]</span>
+					</div>
+				</div>
+				<div class="row align-items-center mb-3">
+					<div class="col-1 text-center">
+						<i class="fas fa-user fa-2x"></i>
+					</div>
+					<div class="col-8">
+						<p class="customer-field" style="margin: 0; text-align: left">Số
+							lượng</p>
+						<span  class="customer-value" style="float: left">[[${chitiet.getSoLuong()}]]</span>
+					</div>
+				</div>
+				<div class="row align-items-center mb-3">
+					<div class="col-1 text-center">
+						<i class="fas fa-user fa-2x"></i>
+					</div>
+					<div class="col-8">
+						<p class="customer-field" style="margin: 0; text-align: left">Đơn
+							giá</p>
+						<span class="customer-value" style="float: left">[[${chitiet.getDonGia()}]]</span>
+					</div>
+				</div>
+				<hr />
 			</div>
 			<div class="row">
 				<div class="col text-center">
