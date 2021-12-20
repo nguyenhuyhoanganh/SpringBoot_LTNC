@@ -16,4 +16,8 @@ public interface TheLoaiService {
 	public List<TheloaiDTO> getAll();
 
 	public List<TheloaiDTO> searchByName(String tenTheLoaiDTO, int curentPage, int size);
-}
+	
+	/*
+	 * public List<TheloaiDTO> listByNhomMua (String tenNhom);
+	 */
+	}

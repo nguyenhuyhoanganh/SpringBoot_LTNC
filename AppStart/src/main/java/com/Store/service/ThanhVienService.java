@@ -19,5 +19,7 @@ public interface ThanhVienService {
 	
 	public List<String> getRolesByUsername(String username);
 	
+	public ThanhvienDTO getThanhVienByUsername(String username);
+	
 	long count();
 }

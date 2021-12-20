@@ -21,6 +21,7 @@ public class SachDTO {
 	private NhommuaDTO nhomMua;
 	private TheloaiDTO theLoai;
 	private NhaxuatbanDTO nhaXuatBan;
+	private String tenTheLoai;
 
 	public int getMaSach() {
 		return maSach;
@@ -126,8 +127,17 @@ public class SachDTO {
 		this.nhaXuatBan = nhaXuatBan;
 	}
 
+	
+	public String getTenTheLoai() {
+		return tenTheLoai;
+	}
+
+	public void setTenTheLoai(String tenTheLoai) {
+		this.tenTheLoai = tenTheLoai;
+	}
+
 	public SachDTO(int maSach, long donGia, String hinhAnh, String hinhAnh2, String hinhAnh3, String moTa,
-			Date ngayCapNhat, int soLuongMua, int soLuongTon, String tenSach) {
+			Date ngayCapNhat, int soLuongMua, int soLuongTon, String tenSach, String tenTheLoai) {
 		super();
 		this.maSach = maSach;
 		this.donGia = donGia;
@@ -143,6 +153,8 @@ public class SachDTO {
 		this.nhomMua = new NhommuaDTO();
 		this.theLoai = new TheloaiDTO();
 		this.nhaXuatBan = new NhaxuatbanDTO();
+		
+		this.tenTheLoai = tenTheLoai;
 	}
 
 	public SachDTO() {
@@ -159,6 +171,17 @@ public class SachDTO {
 
 	public void setImagefiles(List<MultipartFile> imagefiles) {
 		this.imagefiles = imagefiles;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		return (obj instanceof SachDTO)
+				? (((SachDTO) obj).getTheLoai().getMaTheLoai() == this.getTheLoai().getMaTheLoai())
+				: false;
+	}
+	@Override
+	public int hashCode() {
+		return this.theLoai.getMaTheLoai();
 	}
 
 }

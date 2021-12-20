@@ -74,4 +74,19 @@ public class TheLoaiServiceImpl implements TheLoaiService{
 		return null;
 	}
 
+	/*
+	 * @Override public List<TheloaiDTO> listByNhomMua(String tenNhom) {
+	 * List<Theloai> listTheloais = theLoaiRepository.getByNhomMua(tenNhom);
+	 * List<TheloaiDTO> listTheloaiDTOs = new ArrayList<TheloaiDTO>(); for(Theloai
+	 * theloai : listTheloais) { TheloaiDTO theloaiDTO = new TheloaiDTO();
+	 * 
+	 * theloaiDTO.setMaTheLoai(theloai.getMaTheLoai());
+	 * theloaiDTO.setTenTheLoai(theloai.getTenTheLoai());
+	 * theloaiDTO.setIcon(theloai.getIcon());
+	 * 
+	 * listTheloaiDTOs.add(theloaiDTO); }
+	 * 
+	 * return listTheloaiDTOs; }
+	 */
+
 }

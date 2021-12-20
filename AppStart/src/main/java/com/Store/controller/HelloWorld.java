@@ -17,6 +17,10 @@ public class HelloWorld {
 	public String login(HttpServletRequest request, @RequestParam(name="error", required = false) String error) {
 		if(error != null) {
 			request.setAttribute("error", error);
+			/*
+			 * String username = request.getParameter("username"); String password =
+			 * request.getParameter("password"); System.out.println(username + password);
+			 */
 		}
 		return "login";
 	}

@@ -27,9 +27,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.Store.model.SachDTO;
+import com.Store.model.TheloaiDTO;
 import com.Store.service.NhaXuatBanService;
 import com.Store.service.NhomMuaSevice;
 import com.Store.service.SachService;
+import com.Store.service.ThanhVienService;
 import com.Store.service.TheLoaiService;
 import com.Store.validator.SachValidator;
 
@@ -50,6 +52,13 @@ public class SachController {
 
 	@GetMapping(value = "/danh-sach-san-pham")
 	public String getListBook(HttpServletRequest req) {
+		/*
+		Principal principal = req.getUserPrincipal();
+		ThanhvienDTO tv = new ThanhvienDTO();
+		tv = thanhVienService.getThanhVienByUsername(principal.getName());
+		*/
+		
+		
 		// get parameters for search
 		String tensach = req.getParameter("tensach") == null ? "" : req.getParameter("tensach");
 		String theloai = req.getParameter("theloai") == null ? "" : req.getParameter("theloai");

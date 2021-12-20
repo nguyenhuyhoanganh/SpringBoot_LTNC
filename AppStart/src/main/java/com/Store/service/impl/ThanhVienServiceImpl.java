@@ -200,4 +200,37 @@ public class ThanhVienServiceImpl implements ThanhVienService {
 		return roles;
 	}
 
+	@Override
+	public ThanhvienDTO getThanhVienByUsername(String username) {
+		Thanhvien thanhVien = thanhVienRepository.getByUsername(username);
+		ThanhvienDTO thanhVienDTO = new ThanhvienDTO();
+
+		thanhVienDTO.setMaThanhVien(thanhVien.getMaThanhVien());
+		thanhVienDTO.setHoTen(thanhVien.getHoTen());
+		thanhVienDTO.setEmail(thanhVien.getEmail());
+		thanhVienDTO.setDiaChi(thanhVien.getDiaChi());
+		thanhVienDTO.setSoDienThoai(thanhVien.getSoDienThoai());
+		thanhVienDTO.setTaiKhoan(thanhVien.getTaiKhoan());
+		thanhVienDTO.setMatKhau(thanhVien.getMatKhau());
+
+		LoaithanhvienDTO loaiThanhVienDTO = new LoaithanhvienDTO();
+		loaiThanhVienDTO.setMaLoaiThanhVien(thanhVien.getLoaithanhvien().getMaLoaiThanhVien());
+		loaiThanhVienDTO.setTenLoaiThanhVien(thanhVien.getLoaithanhvien().getTenLoaiThanhVien());
+		loaiThanhVienDTO.setUuDai(thanhVien.getLoaithanhvien().getUuDai());
+
+		List<Vaitro> listVaiTro = thanhVien.getLoaithanhvien().getVaitros();
+		List<VaitroDTO> listVaiTroDTO = new ArrayList<VaitroDTO>();
+		for(Vaitro vaiTro : listVaiTro) {
+			VaitroDTO vaiTroDTO = new VaitroDTO();
+			vaiTroDTO.setMaVaiTro(vaiTro.getMaVaiTro());
+			vaiTroDTO.setTenVaiTro(vaiTro.getTenVaiTro());
+			listVaiTroDTO.add(vaiTroDTO);
+		}
+		loaiThanhVienDTO.setVaiTro(listVaiTroDTO);
+		
+		thanhVienDTO.setLoaiThanhVien(loaiThanhVienDTO);
+		
+		return thanhVienDTO;
+	}
+
 }

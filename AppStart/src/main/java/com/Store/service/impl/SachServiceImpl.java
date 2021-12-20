@@ -148,6 +148,7 @@ public class SachServiceImpl implements SachService {
 			TheloaiDTO genreDTO = new TheloaiDTO();
 			genreDTO.setMaTheLoai(book.getTheloai().getMaTheLoai());
 			genreDTO.setTenTheLoai(book.getTheloai().getTenTheLoai());
+			bookDTO.setTenTheLoai(book.getTheloai().getTenTheLoai());
 			bookDTO.setTheLoai(genreDTO);
 
 			NhommuaDTO groupDTO = new NhommuaDTO();

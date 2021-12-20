@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<title>Title</title>
+<link rel="stylesheet" th:href="@{/css/pagination.css}">
+</head>
+<body>
+	<p>==============================TÌM KIẾM THEO TÊN==================================</p>
+	<form th:action="@{/tim-kiem}" method="GET">
+		<input type="text" name="tensach" th:value="${tensach}"
+			placeholder="Nhập tên sách">
+		<button type="submit">Tìm Kiếm</button>
+	</form>
+	<p>==============================LỌC THEO NHÓM MUA - THỂ LOẠI===========================================</p>
+	<!-- Đây là filer: (do CSDL thiết kế sida, nên cố gắng khi thêm sách sao cho 1 nhóm mua có nhiều thể loại, 1 thể loại có 1 nhóm mua duy nhất) -->
+	<!-- Đây là filer: (do CSDL thiết kế sida, nên cố gắng khi thêm sách sao cho 1 nhóm mua có nhiều thể loại, 1 thể loại có 1 nhóm mua duy nhất) -->
+	<ul>
+
+		<!-- Lọc nhóm mua -->
+		<li th:each="nhommua : ${NhomMuas}"><a
+			th:href="'tim-kiem?nhommua=' + ${nhommua.tenNhom}">[[${nhommua.tenNhom}]]</a>
+			<ul>
+
+				<!-- Lọc thể loại theo nhóm mua -->
+				<li th:each="theloai : ${theloais}"
+					th:if="${theloai.nhomMua.tenNhom} == ${nhommua.tenNhom}"><a
+					th:href="'tim-kiem?nhommua=' + ${nhommua.tenNhom} + '&theloai=' + ${theloai.theLoai.tenTheLoai}">[[${theloai.theLoai.tenTheLoai}]]</a>
+				</li>
+			</ul></li>
+	</ul>
+
+	<p>=============================LẶP LẤY TỪNG SẢN PHẨM========================</p>
+	<!-- lặp sách như đối với listsach -->
+	
+	<!-- xem chi tiết sách như đối với details của user -->
+	
+			th:href="@{'/san-pham/'+${book.maSach}}"  : link xem chi tiết
+			
+			
+	<!-- đường dẫn là /danh-sach-san-pham -->
+	<p>=============================PHÂN TRANG VỚI TRANG DANH-SACH-SAN-PHAM=======================================</p>
+
+
+	<!-- phân trang -->
+	<div class="pagination col-6">
+
+		<th:block th:if="${totalPage <= 8}">
+			<a th:href="@{'/danh-sach-san-pham?currentPage='+${i}}"
+				th:each="i: ${#numbers.sequence(1, totalPage)}"
+				th:class="${currentPage == i ? 'active' : ''}">[[${i}]]</a>
+		</th:block>
+		<th:block th:if="${totalPage > 8}">
+			<a th:href="@{'/danh-sach-san-pham?currentPage=1'}"
+				th:class="${currentPage == 1 ? 'disbale' : ''}">&laquo;</a>
+			<th:block th:if="${currentPage <= 4 || currentPage > totalPage - 3}">
+				<a th:href="@{'/danh-sach-san-pham?currentPage='+${i}}"
+					th:each="i: ${#numbers.sequence(1, 5)}"
+					th:class="${currentPage == i ? 'active' : ''}">[[${i}]]</a>
+				<a th:href="@{'/danh-sach-san-pham?currentPage=5'}">...</a>
+				<a th:href="@{'danh-sach-san-pham?currentPage='+${i}"
+					th:each="i: ${#numbers.sequence(totalPage - 3, totalPage)}"
+					th:class="${currentPage == i ? 'active' : ''}">[[${i}]]</a>
+			</th:block>
+			<a th:href="@{'/danh-sach-san-pham?currentPage='+${totalPage}}"
+				th:class="${currentPage == totalPage ? 'disbale' : ''}">&raquo;</a>
+		</th:block>
+
+		<th:block th:if="${currentPage > 4 && currentPage < totalPage - 3}">
+			<a th:href="@{'/danh-sach-san-pham?currentPage='+${currentPage - 4}}">...</a>
+
+			<a th:href="@{'/danh-sach-san-pham?currentPage='+${i}}"
+				th:each="i: ${#numbers.sequence(currentPage - 3, currentPage + 3)}"
+				th:class="${currentPage == i ? 'active' : ''}">[[${i}]]</a>
+			<a th:href="@{'/danh-sach-san-pham?currentPage='+${currentPage + 4}}">...</a>
+		</th:block>
+	</div>
+
+</body>
+</html>
