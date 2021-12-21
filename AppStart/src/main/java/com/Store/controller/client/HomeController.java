@@ -6,6 +6,7 @@ import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.Store.model.ChitietdonhangDTO;
 import com.Store.model.SachDTO;
 import com.Store.model.ThanhvienDTO;
 import com.Store.service.NhaXuatBanService;
@@ -75,6 +77,9 @@ public class HomeController {
 			theloaiSachs.add(book);
 		}
 		req.setAttribute("theloais", theloaiSachs);
+		
+		int tongSoLuong = session.getAttribute("tongSoLuong") == null ? 0 : (int) session.getAttribute("tongSoLuong");
+		session.setAttribute("tongSoLuong", tongSoLuong);
 		return "client/index";
 	}
 
@@ -82,7 +87,7 @@ public class HomeController {
 	public String search(HttpServletRequest req, HttpSession session) {
 
 		// get user in session
-		ThanhvienDTO thanhVienDTO = (ThanhvienDTO) session.getAttribute("cart");
+		ThanhvienDTO thanhVienDTO = (ThanhvienDTO) session.getAttribute("user");
 		if (thanhVienDTO != null)
 			req.setAttribute("user", thanhVienDTO);
 
@@ -125,13 +130,27 @@ public class HomeController {
 		req.setAttribute("theloais", theloaiSachs);
 
 		req.setAttribute("books", books);
+		
+		int tongSoLuong = session.getAttribute("tongSoLuong") == null ? 0 : (int) session.getAttribute("tongSoLuong");
+		session.setAttribute("tongSoLuong", tongSoLuong);
 		return "client/search";
 	}
 
 	@GetMapping(value = "/san-pham/{bookId}")
 	public String deletesBook(HttpServletRequest req, @PathVariable(name = "bookId") int bookId, HttpSession session) {
+		// get cart in session
+		Object cart = session.getAttribute("cart");
+		Map<Integer, ChitietdonhangDTO> mapCTDHDTO = (Map<Integer, ChitietdonhangDTO>) cart;
+		if(mapCTDHDTO != null) {
+			ChitietdonhangDTO CTDHDTO = mapCTDHDTO.get(bookId);
+			if(CTDHDTO != null)
+			req.setAttribute("soLuong", CTDHDTO.getSoLuong());
+			else req.setAttribute("soLuong", 1);
+		}
+		else req.setAttribute("soLuong", 1);
+		
 		// get user in session
-		ThanhvienDTO thanhVienDTO = (ThanhvienDTO) session.getAttribute("cart");
+		ThanhvienDTO thanhVienDTO = (ThanhvienDTO) session.getAttribute("user");
 		if (thanhVienDTO != null)
 			req.setAttribute("user", thanhVienDTO);
 
@@ -143,6 +162,9 @@ public class HomeController {
 		req.setAttribute("theloais", theloaiSachs);
 		req.setAttribute("masach", bookId);
 		req.setAttribute("sach", sachService.getBookById(bookId));
+		
+		int tongSoLuong = session.getAttribute("tongSoLuong") == null ? 0 : (int) session.getAttribute("tongSoLuong");
+		session.setAttribute("tongSoLuong", tongSoLuong);
 		return "client/details";
 	}
 

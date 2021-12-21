@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>Giỏ Hàng</title>
+</head>
+<body>
+	<p>Chi tiet gio hang</p>
+	<table border="1px solid black">
+		<tr>
+			<th>Mã Sách</th>
+			<th>Tên</th>
+			<th>Số Lượng</th>
+			<th>Đơn Giá</th>
+			<th>option</th>
+		</tr>
+
+		<tr th:each="entry: ${session.cart}">
+			<th th:text="${entry.key}"></th>
+			<th th:text="${entry.value.sach.tenSach}"></th>
+			<th th:text="${entry.value.soLuong }"></th>
+			<th th:text="${entry.value.donGia }"></th>
+			<th><a th:href="@{'/xoa-san-pham?maSach='+${entry.key}}">
+					xoa</a> <a></a></th>
+		</tr>
+
+	</table>
+
+	<a th:href="@{/danh-sach-san-pham}" role="button">Mua tiếp</a>
+	<a th:href="@{/thanh-toan}" role="button">Thanh toán</a>
+
+</body>
+</html>

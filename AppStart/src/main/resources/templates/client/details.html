@@ -22,9 +22,6 @@
 <body>
 	<section layout:fragment="content">
 
-		<!-- để lưu mã sách ở trang -->
-		<input type="text" name="masach" th:value="${masach}"
-			style="visibility: hidden;">
 		<!-- nội dung của trang  -->
 		<section class="product-page mb-4">
 			<div class="container">
@@ -97,6 +94,8 @@
 											<li>Bao sách miễn phí (theo yêu cầu)</li>
 										</ul>
 									</div>
+									<form method="GET" th:action="@{/them-san-pham}">
+									<input name="maSach" th:value="${sach.maSach}" style="visibility: hidden;">
 									<div class="soluong d-flex text-center">
 										<div
 											class="input-number input-group mb-3 justify-content-center">
@@ -104,13 +103,14 @@
 											<div class="input-group-prepend">
 												<span class="input-group-text btn-spin btn-dec">-</span>
 											</div>
-											<input type="text" value="1" class="soluongsp  text-center">
+											<input type="text" th:value="${soLuong}" class="soluongsp  text-center" name="soLuong">
 											<div class="input-group-append">
 												<span class="input-group-text btn-spin btn-inc">+</span>
 											</div>
 										</div>
 									</div>
-									<div class="nutmua btn w-100 text-uppercase">Chọn mua</div>
+									<input type="submit" class="nutmua btn w-100 text-uppercase" value="Chọn mua">
+									</form>
 									<a class="huongdanmuahang text-decoration-none" href="#">(Vui
 										lòng xem hướng dẫn mua hàng)</a>
 									<div class="fb-like"

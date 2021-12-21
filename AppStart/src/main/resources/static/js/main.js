@@ -474,7 +474,7 @@ $(function () {
         alert("cảm ơn đã mua hàng");
     });
 
-    onLoadCartNumbers();
+    //onLoadCartNumbers();
     displayCart()
 
     $('.items .row').isotope({
