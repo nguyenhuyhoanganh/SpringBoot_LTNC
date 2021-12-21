@@ -249,7 +249,11 @@
 											class="header text-uppercase">[[${nhommua.tenNhom}]]</a></li>
 										<!-- Lọc thể loại theo nhóm mua -->
 										<div class="content trai">
-											<li th:each="theloai : ${theloais}" th:if="${theloai.nhomMua.tenNhom} == ${nhommua.tenNhom}"><a href="#">[[${theloai.theLoai.tenTheLoai}]]</a></li>
+											<li th:each="theloai : ${theloais}" th:if="${theloai.nhomMua.tenNhom} == ${nhommua.tenNhom}">
+												<a th:href="'tim-kiem?nhommua=' + ${nhommua.tenNhom} + '&theloai=' + ${theloai.theLoai.tenTheLoai}">
+													[[${theloai.theLoai.tenTheLoai}]]
+												</a>
+											</li>
 										</div>
 									</ul></li>
 							</ul>

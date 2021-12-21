@@ -27,11 +27,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.Store.model.SachDTO;
-import com.Store.model.TheloaiDTO;
 import com.Store.service.NhaXuatBanService;
 import com.Store.service.NhomMuaSevice;
 import com.Store.service.SachService;
-import com.Store.service.ThanhVienService;
 import com.Store.service.TheLoaiService;
 import com.Store.validator.SachValidator;
 
@@ -118,19 +116,6 @@ public class SachController {
 	public String deletesBook(HttpServletRequest req, @PathVariable(name = "bookId") int bookId) {
 		sachService.deleteBook(sachService.getBookById(bookId));
 		return "redirect:/admin/san-pham/danh-sach-san-pham";
-	}
-
-	@GetMapping(value = "/download")
-	public void download(HttpServletResponse response, @RequestParam("image") String image) {
-		final String uploadFolder = ".\\src\\main\\resources\\static\\img\\";
-		File file = new File(uploadFolder + File.separator + image);
-		if (file.exists()) {
-			try {
-				Files.copy(file.toPath(), response.getOutputStream());
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
 	}
 
 	@GetMapping(value = "/them-moi-san-pham")

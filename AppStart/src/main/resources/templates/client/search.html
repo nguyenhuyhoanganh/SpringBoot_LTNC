@@ -28,7 +28,7 @@
 									<a th:href="@{'/san-pham/'+${book.maSach}}" class="motsanpham"
 										style="text-decoration: none; color: black;"
 										data-toggle="tooltip" data-placement="bottom"
-										title="Lập Kế Hoạch Kinh Doanh Hiệu Quả"> <img th:src="@{'/admin/san-pham/download?image='+${book.getHinhAnh()}}"
+										title="Lập Kế Hoạch Kinh Doanh Hiệu Quả"> <img th:src="@{'/download?image='+${book.getHinhAnh()}}"
 										class="card-img-top anh" th:alt="@{book.tenSach}">
 										<div class="card-body noidungsp mt-3">
 											<h6 class="card-title ten">[[${book.tenSach}]]</h6>

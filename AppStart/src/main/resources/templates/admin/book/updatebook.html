@@ -109,15 +109,15 @@
 								<span class="text-danger" th:errors="*{imagefiles}"></span>
 							<div id="images" class="card-body col-12 d-flex justify-content-start">
 								<div class="image_container d-flex justify-content-center position-relative">
-									<img th:src="@{'/admin/san-pham/download?image='+${Sach.getHinhAnh()}}">
+									<img th:src="@{'/download?image='+${Sach.getHinhAnh()}}">
 									<span class="position-absolute temp-delete-ic">x</span>
 								</div>
 								<div class="image_container d-flex justify-content-center position-relative">
-									<img th:src="@{'/admin/san-pham/download?image='+${Sach.getHinhAnh2()}}">
+									<img th:src="@{'/download?image='+${Sach.getHinhAnh2()}}">
 									<span class="position-absolute temp-delete-ic">x</span>
 								</div>
 								<div class="image_container d-flex justify-content-center position-relative">
-									<img th:src="@{'/admin/san-pham/download?image='+${Sach.getHinhAnh3()}}">
+									<img th:src="@{'/download?image='+${Sach.getHinhAnh3()}}">
 									<span class="position-absolute temp-delete-ic">x</span>
 								</div>
 							</div>

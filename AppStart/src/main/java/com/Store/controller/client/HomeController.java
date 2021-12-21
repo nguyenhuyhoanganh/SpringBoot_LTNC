@@ -1,15 +1,20 @@
 package com.Store.controller.client;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.Store.model.SachDTO;
 import com.Store.service.NhaXuatBanService;
@@ -116,5 +121,18 @@ public class HomeController {
 		req.setAttribute("masach", bookId);
 		req.setAttribute("sach", sachService.getBookById(bookId));
 		return "client/details";
+	}
+	
+	@GetMapping(value = "/download")
+	public void download(HttpServletResponse response, @RequestParam("image") String image) {
+		final String uploadFolder = ".\\src\\main\\resources\\static\\img\\";
+		File file = new File(uploadFolder + File.separator + image);
+		if (file.exists()) {
+			try {
+				Files.copy(file.toPath(), response.getOutputStream());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 }
