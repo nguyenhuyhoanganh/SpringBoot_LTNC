@@ -167,7 +167,7 @@ $(function () {
             },
             password: {
                 required: true,
-                minlength: 6
+                minlength: 0
             },
             confirm_password: {
                 required: true,
@@ -206,14 +206,14 @@ $(function () {
 
     $("#form-signin").validate({
         rules: {
-            password: {
+            /*password: {
                 required: true,
                 minlength: 6
             },
             email: {
                 required: true,
                 email: true
-            }
+            }*/
         },
         messages: {
             password: {
