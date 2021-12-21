@@ -19,17 +19,12 @@ public class LoginController {
 	@Autowired
 	ThanhVienService thanhVienService;
 
-	@GetMapping(value = "/hello-world")
-	public String helloWorld(HttpServletRequest request) {
-		return "admin/common/index";
-	}
-
 	@GetMapping(value = "/dang-nhap")
 	public String login(HttpServletRequest request, @RequestParam(name = "error", required = false) String error) {
 		if (error != null) {
 			request.setAttribute("error", error);
 		}
-		return "login";
+		return "client/index";
 	}
 
 	@RequestMapping("/default")
@@ -43,5 +38,10 @@ public class LoginController {
 			return "redirect:/admin/san-pham/danh-sach-san-pham";
 		}
 		return "redirect:/danh-sach-san-pham";
+	}
+	@GetMapping(value = "/logout")
+	public String login(HttpServletRequest request, HttpSession session) {
+		session.setAttribute("user", null);
+		return "client/index";
 	}
 }
