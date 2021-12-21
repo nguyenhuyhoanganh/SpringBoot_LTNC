@@ -42,7 +42,7 @@
 							</div>
 							<div class="list-anhchitiet d-flex mb-4"
 								style="margin-left: 2rem;">
-								<img class="thumb-img thumb1 mr-3 img-fluid"
+								<img class="thumb-img thumb1 mr-3 img-fluid anh-bia"
 									th:src="@{'/download?image='+${sach.getHinhAnh()}}"
 									alt="${sach.tenSach}"> <img
 									class="thumb-img thumb1 mr-3 img-fluid"
@@ -103,7 +103,7 @@
 											<div class="input-group-prepend">
 												<span class="input-group-text btn-spin btn-dec">-</span>
 											</div>
-											<input type="text" th:value="${soLuong}" class="soluongsp  text-center" name="soLuong">
+											<input type="text" th:value="${soLuong}" class="soluongsp text-center" name="soLuong">
 											<div class="input-group-append">
 												<span class="input-group-text btn-spin btn-inc">+</span>
 											</div>

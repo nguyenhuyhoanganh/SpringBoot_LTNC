@@ -301,47 +301,47 @@ $(function () {
     });
 
     // add to cart 
-    let product =
+   /* let product =
     {
         name: $('.khoithongtin .ten').text(),
-        tag: $('.product-image').attr("alt"),
-        price: parseFloat($('.gia span.giamoi').text()),
-        old_price:parseFloat($('.gia span.giacu').text()),
+        tag: $('.product-image').attr("src"),
+        price: parseInt($('.gia span.giamoi').text()),
+        /*old_price:parseFloat($('.gia span.giacu').text()),
         inCart: 0
-    }
+    }*/
 
-    let carts = document.querySelector('.nutmua');
+    /*let carts = document.querySelector('.nutmua');
     if (carts) {
         carts.addEventListener('click', () => {
             cartNumbers(product);
             totalCost(product);
         })
-    }
+    }*/
 
-    function onLoadCartNumbers() {
-        let productNumbers = localStorage.getItem('cartNumbers');
+    /*function onLoadCartNumbers() {
+        let productNumbers = sessionStorage.getItem('cartNumbers');
         if (productNumbers) {
             document.querySelector('.giohang .cart-amount').textContent = productNumbers;
         }
-    }
+    }*/
 
-    function cartNumbers(product) {
+    /*function cartNumbers(product) {
 
-        let productNumbers = localStorage.getItem('cartNumbers');
+        let productNumbers = sessionStorage.getItem('cartNumbers');
         productNumbers = parseInt(productNumbers);
 
         if (productNumbers) {
-            localStorage.setItem('cartNumbers', productNumbers + parseInt($(".soluongsp").val()));
+            sessionStorage.setItem('cartNumbers', productNumbers + parseInt($(".soluongsp").val()));
             document.querySelector('.giohang .cart-amount').textContent = productNumbers + parseInt($(".soluongsp").val());
         } else {
-            localStorage.setItem('cartNumbers', parseInt($(".soluongsp").val()));
+            sessionStorage.setItem('cartNumbers', parseInt($(".soluongsp").val()));
             document.querySelector('.giohang .cart-amount').textContent = parseInt($(".soluongsp").val());
         }
         setItem(product);
     }
 
     function setItem(product) {
-        let cartItems = localStorage.getItem('productsInCart');
+        let cartItems = sessionStorage.getItem('productsInCart');
         cartItems = JSON.parse(cartItems);
 
         if (cartItems != null) {
@@ -359,26 +359,26 @@ $(function () {
             }
         }
 
-        localStorage.setItem('productsInCart', JSON.stringify(cartItems));
+        sessionStorage.setItem('productsInCart', JSON.stringify(cartItems));
     }
 
     function totalCost(product) {
-        let cartCost = localStorage.getItem('totalCost');
+        let cartCost = sessionStorage.getItem('totalCost');
 
         if (cartCost != null) {
             cartCost = parseFloat(cartCost);
-            localStorage.setItem('totalCost', cartCost + parseInt($(".soluongsp").val()) * product.price);
+            sessionStorage.setItem('totalCost', cartCost + parseInt($(".soluongsp").val()) * product.price);
         } else {
-            localStorage.setItem('totalCost', parseInt($(".soluongsp").val()) * product.price);
+            sessionStorage.setItem('totalCost', parseInt($(".soluongsp").val()) * product.price);
         }
     }
 
     function displayCart() {
-        let cartItems = localStorage.getItem("productsInCart");
+        let cartItems = sessionStorage.getItem("productsInCart");
         cartItems = JSON.parse(cartItems);
         let cartContent = document.querySelector(".cart-content");
-        let cartCost = localStorage.getItem('totalCost');
-        let productNumbers = localStorage.getItem('cartNumbers');
+        let cartCost = sessionStorage.getItem('totalCost');
+        let productNumbers = sessionStorage.getItem('cartNumbers');
 
         if (cartItems == null) {
             $(".cart-empty").removeClass("d-none");
@@ -394,13 +394,12 @@ $(function () {
 
             cartContent.innerHTML += `
             <h6 class="header-gio-hang">GIỎ HÀNG CỦA BẠN <span>(${productNumbers} sản phẩm)</span></h6>
-            <div class="cart-list-items">
-            `
+            <div class="cart-list-items">`
             Object.values(cartItems).map(item => {
                 cartContent.innerHTML += `
                     <div class="cart-item d-flex">
                         <a href="product-item.html" class="img">
-                            <img src="images/${item.tag}.jpg" class="img-fluid" alt="${item.tag}">
+                            <img src="${item.tag}" class="img-fluid" alt="${item.name}">
                         </a>
                         <div class="item-caption d-flex w-100">
                             <div class="item-info ml-3">
@@ -469,13 +468,13 @@ $(function () {
     }
 
     $(".btn-checkout").click(function (e) {
-        localStorage.clear();
+        sessionStorage.clear();
         location.reload(true);
         alert("cảm ơn đã mua hàng");
     });
 
     //onLoadCartNumbers();
-    displayCart()
+    displayCart()*/
 
     $('.items .row').isotope({
         itemSelector:'.item',
@@ -496,5 +495,4 @@ $(function () {
     $("#changepass").click(function (e) { 
         $('.thay-doi-mk').toggle(200);
     });
-
 });

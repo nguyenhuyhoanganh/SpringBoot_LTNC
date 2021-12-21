@@ -114,12 +114,12 @@
 							</form>
 						</div>
 					</div>
-					<li class="nav-item giohang"><a href="gio-hang.html"
+					<li class="nav-item giohang"><a th:href="@{/gio-hang}"
 						class="btn btn-secondary rounded-circle"> <i
 							class="fa fa-shopping-cart"></i>
-							<div class="cart-amount" th:text="${session.tongSoLuong}"></div>
+							<div class="cart-amount">[[${session.tongSoLuong}]]</div>
 					</a> <a class="nav-link text-dark giohang text-uppercase"
-						href="gio-hang.html" style="display: inline-block">Giỏ Hàng</a></li>
+						th:href="@{/gio-hang}" style="display: inline-block">Giỏ Hàng</a></li>
 				</ul>
 			</div>
 		</div>
