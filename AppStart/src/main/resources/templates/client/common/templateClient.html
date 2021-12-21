@@ -85,7 +85,7 @@
 				</form>
 				<!-- ô đăng nhập đăng ký giỏ hàng trên header  -->
 				<ul class="navbar-nav mb-1 ml-auto align-items-center">
-					<div class="dropdown" th:if="${user} == null" >
+					<div class="dropdown" th:if="${user} == null">
 						<li class="nav-item account btn dropdown" type="button"
 							data-toggle="dropdown"><a href="#"
 							class="btn btn-secondary rounded-circle"> <i
@@ -99,7 +99,7 @@
 								data-toggle="modal" data-target="#formdangnhap">Đăng nhập</a>
 						</div>
 					</div>
-					<div class="dropdown" th:if="${user} != null" >
+					<div class="dropdown" th:if="${user} != null">
 						<li class="nav-item account btn dropdown" type="button"
 							data-toggle="dropdown"><a href="#"
 							class="btn btn-secondary rounded-circle"> <i
@@ -107,10 +107,11 @@
 						</a> <a class="nav-link text-dark text-uppercase" href="#"
 							style="display: inline-block">[[${user.hoTen}]]</a></li>
 						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-							<a class="dropdown-item nutdangky text-center mb-2"
-								data-toggle="modal" th:href="@{/logout}">Đăng xuất</a> <!-- <a
-								class="dropdown-item nutdangnhap text-center" href="#"
-								data-toggle="modal" data-target="#formdangnhap">Đăng nhập</a> -->
+							<form method="POST" th:action="@{/logout}">
+								<input type="submit"
+									class="btn btn-danger col-12 text-center mb-2"
+									data-toggle="modal" value="Đăng xuất">
+							</form>
 						</div>
 					</div>
 					<li class="nav-item giohang"><a href="gio-hang.html"
@@ -145,8 +146,8 @@
 					</button>
 				</div>
 				<div class="modal-body">
-				
-				
+
+
 					<form id="form-signup" class="form-signin mt-2">
 						<div class="form-label-group">
 							<input type="text" class="form-control"
@@ -180,8 +181,8 @@
 								mật</a>
 						</div>
 					</form>
-					
-					
+
+
 				</div>
 			</div>
 		</div>
@@ -208,20 +209,22 @@
 					</button>
 				</div>
 				<div class="modal-body">
-				
-				
-				
-					<form id="form-signin" class="form-signin mt-2" method="post" th:action="@{/dang-nhap}">
+
+
+
+					<form id="form-signin" class="form-signin mt-2" method="post"
+						th:action="@{/dang-nhap}">
 						<div class="form-label-group">
 							<input type="text" class="form-control"
-								placeholder="Nhập tài khoản" name="username" >
+								placeholder="Nhập tài khoản" name="username">
 						</div>
 
 						<div class="form-label-group">
 							<input type="password" class="form-control"
-								placeholder="Nhập mật khẩu" name="password" >
+								placeholder="Nhập mật khẩu" name="password">
 						</div>
-						<p th:if = "${error} == 'error'">Tài khoản hoặc mật khẩu không đúng</p>
+						<p th:if="${error} == 'error'">Tài khoản hoặc mật khẩu không
+							đúng</p>
 						<div class="custom-control custom-checkbox mb-3">
 							<input type="checkbox" class="custom-control-input"
 								id="customCheck1"> <label class="custom-control-label"
@@ -270,10 +273,11 @@
 											class="header text-uppercase">[[${nhommua.tenNhom}]]</a></li>
 										<!-- Lọc thể loại theo nhóm mua -->
 										<div class="content trai">
-											<li th:each="theloai : ${theloais}" th:if="${theloai.nhomMua.tenNhom} == ${nhommua.tenNhom}">
-												<a th:href="'tim-kiem?nhommua=' + ${nhommua.tenNhom} + '&theloai=' + ${theloai.theLoai.tenTheLoai}">
-													[[${theloai.theLoai.tenTheLoai}]]
-												</a>
+											<li th:each="theloai : ${theloais}"
+												th:if="${theloai.nhomMua.tenNhom} == ${nhommua.tenNhom}">
+												<a
+												th:href="'tim-kiem?nhommua=' + ${nhommua.tenNhom} + '&theloai=' + ${theloai.theLoai.tenTheLoai}">
+													[[${theloai.theLoai.tenTheLoai}]] </a>
 											</li>
 										</div>
 									</ul></li>

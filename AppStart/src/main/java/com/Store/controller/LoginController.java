@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -20,28 +21,37 @@ public class LoginController {
 	ThanhVienService thanhVienService;
 
 	@GetMapping(value = "/dang-nhap")
-	public String login(HttpServletRequest request, @RequestParam(name = "error", required = false) String error) {
+	public String login(HttpServletRequest request, @RequestParam(name = "error", required = false) String error,
+			HttpSession session) {
 		if (error != null) {
 			request.setAttribute("error", error);
 		}
-		return "client/index";
+		if (request.getUserPrincipal() != null) {
+			Principal principal = request.getUserPrincipal();
+			ThanhvienDTO user = new ThanhvienDTO();
+			user = thanhVienService.getThanhVienByUsername(principal.getName());
+			session.setAttribute("user", user);
+		}
+		return "redirect:/danh-sach-san-pham";
 	}
 
 	@RequestMapping("/default")
 	public String defaultAfterLogin(HttpServletRequest request, HttpSession session) {
-		Principal principal = request.getUserPrincipal(); 
-		ThanhvienDTO user = new ThanhvienDTO(); 
-		user = thanhVienService.getThanhVienByUsername(principal.getName());
-		/* System.out.println(user.getHoTen()); */
-		session.setAttribute("user", user);
+		if(session.getAttribute("user") == null) {
+			Principal principal = request.getUserPrincipal();
+			ThanhvienDTO user = new ThanhvienDTO();
+			user = thanhVienService.getThanhVienByUsername(principal.getName());
+			session.setAttribute("user", user);
+		}
 		if (request.isUserInRole("ROLE_ADMIN")) {
 			return "redirect:/admin/san-pham/danh-sach-san-pham";
 		}
 		return "redirect:/danh-sach-san-pham";
 	}
-	@GetMapping(value = "/logout")
+
+	@PostMapping(value = "/logout")
 	public String login(HttpServletRequest request, HttpSession session) {
 		session.setAttribute("user", null);
-		return "client/index";
+		return "redirect:/danh-sach-san-pham";
 	}
 }

@@ -35,6 +35,7 @@ public class LoginServiceImpl implements UserDetailsService {
 		List<String> roles = new ArrayList<String>();
 		for (Vaitro vaiTro : thanhVien.getLoaithanhvien().getVaitros()) {
 			roles.add(vaiTro.getTenVaiTro());
+			System.out.println("ROLE: " + vaiTro.getTenVaiTro());
 		}
 
 		List<SimpleGrantedAuthority> authorities = new ArrayList<SimpleGrantedAuthority>();
