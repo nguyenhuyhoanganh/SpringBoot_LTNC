@@ -3,6 +3,7 @@ package com.Store.controller.client;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -59,7 +60,12 @@ public class HomeController {
 		req.setAttribute("start", start);
 		req.setAttribute("end", end);
 
-		List<SachDTO> books = sachService.getAllBook(currentPage - 1, size);
+		List<SachDTO> books = new ArrayList<SachDTO>();
+		for(SachDTO book : sachService.getAllBook(currentPage - 1, size)) {
+			if(book.getSoLuongTon() >= 1) {
+				books.add(book);
+			}
+		}
 
 		req.setAttribute("NhomMuas", nhomMuaSevice.getAll());
 		req.setAttribute("books", books);
