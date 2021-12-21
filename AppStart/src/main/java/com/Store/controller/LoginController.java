@@ -37,8 +37,8 @@ public class LoginController {
 		Principal principal = request.getUserPrincipal(); 
 		ThanhvienDTO user = new ThanhvienDTO(); 
 		user = thanhVienService.getThanhVienByUsername(principal.getName());
+		/* System.out.println(user.getHoTen()); */
 		session.setAttribute("user", user);
-		
 		if (request.isUserInRole("ROLE_ADMIN")) {
 			return "redirect:/admin/san-pham/danh-sach-san-pham";
 		}

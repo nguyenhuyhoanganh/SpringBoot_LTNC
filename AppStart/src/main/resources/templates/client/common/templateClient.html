@@ -85,7 +85,7 @@
 				</form>
 				<!-- ô đăng nhập đăng ký giỏ hàng trên header  -->
 				<ul class="navbar-nav mb-1 ml-auto align-items-center">
-					<div class="dropdown">
+					<div class="dropdown" th:if="${user} == null" >
 						<li class="nav-item account btn dropdown" type="button"
 							data-toggle="dropdown"><a href="#"
 							class="btn btn-secondary rounded-circle"> <i
@@ -98,6 +98,20 @@
 								class="dropdown-item nutdangnhap text-center" href="#"
 								data-toggle="modal" data-target="#formdangnhap">Đăng nhập</a>
 						</div>
+					</div>
+					<div class="dropdown" th:if="${user} != null" >
+						<li class="nav-item account btn dropdown" type="button"
+							data-toggle="dropdown"><a href="#"
+							class="btn btn-secondary rounded-circle"> <i
+								class="fa fa-user"></i>
+						</a> <a class="nav-link text-dark text-uppercase" href="#"
+							style="display: inline-block">[[${user.hoTen}]]</a></li>
+<!-- 						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+							<a class="dropdown-item nutdangky text-center mb-2" href="#"
+								data-toggle="modal" data-target="#formdangky">Đăng ký</a> <a
+								class="dropdown-item nutdangnhap text-center" href="#"
+								data-toggle="modal" data-target="#formdangnhap">Đăng nhập</a>
+						</div> -->
 					</div>
 					<li class="nav-item giohang"><a href="gio-hang.html"
 						class="btn btn-secondary rounded-circle"> <i
