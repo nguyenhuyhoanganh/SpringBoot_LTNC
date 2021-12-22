@@ -46,10 +46,10 @@
 									th:src="@{'/download?image='+${sach.getHinhAnh()}}"
 									alt="${sach.tenSach}"> <img
 									class="thumb-img thumb1 mr-3 img-fluid"
-									th:src="@{'/download?image='+${sach.getHinhAnh2()}}"
+									th:src="@{'/download?image='+${sach.getHinhAnh2()}}" th:if="${sach.getHinhAnh2()} != null"
 									alt="${sach.tenSach}"> <img
 									class="thumb-img thumb2 img-fluid"
-									th:src="@{'/download?image='+${sach.getHinhAnh3()}}"
+									th:src="@{'/download?image='+${sach.getHinhAnh3()}}" th:if="${sach.getHinhAnh2()} != null"
 									alt="${sach.tenSach}">
 							</div>
 						</div>
