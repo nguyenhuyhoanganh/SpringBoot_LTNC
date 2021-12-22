@@ -3,8 +3,10 @@ package com.Store.controller.client;
 import java.text.NumberFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 import java.util.Map.Entry;
 
 import javax.servlet.http.HttpServletRequest;
@@ -26,7 +28,9 @@ import com.Store.model.SachDTO;
 import com.Store.service.ChiTietDonHangService;
 import com.Store.service.DonHangService;
 import com.Store.service.KhachHangService;
+import com.Store.service.NhomMuaSevice;
 import com.Store.service.SachService;
+import com.Store.service.TheLoaiService;
 import com.Store.validator.KhachHangValidator;
 
 @Controller
@@ -41,6 +45,10 @@ public class CartController {
 	SachService sachService;
 	@Autowired
 	KhachHangValidator khachHangValidator;
+	@Autowired
+	TheLoaiService theLoaiService;
+	@Autowired
+	NhomMuaSevice nhomMuaSevice;
 
 	@GetMapping(value = "/them-san-pham")
 	public String addToCart(HttpServletRequest req, HttpSession session, @RequestParam(name = "maSach") int maSach,
@@ -124,15 +132,30 @@ public class CartController {
 
 	@GetMapping(value = "/gio-hang")
 	public String addOrder(HttpServletRequest req, Model model) {
+		req.setAttribute("NhomMuas", nhomMuaSevice.getAll());
+
+		Set<SachDTO> theloaiSachs = new HashSet<SachDTO>();
+		for (SachDTO book : sachService.getAllBook(0, (int) sachService.count())) {
+			theloaiSachs.add(book);
+		}
+		req.setAttribute("theloais", theloaiSachs);
+
 		model.addAttribute("Khachang", new KhachhangDTO());
 		return "client/cart";
 	}
 
 	@PostMapping(value = "/gio-hang")
 	public String addOrder(HttpServletRequest req, HttpSession session,
-			@ModelAttribute("Khachang") KhachhangDTO khachhang, BindingResult bindingResult){
+			@ModelAttribute("Khachang") KhachhangDTO khachhang, BindingResult bindingResult) {
+		req.setAttribute("NhomMuas", nhomMuaSevice.getAll());
+
+		Set<SachDTO> theloaiSachs = new HashSet<SachDTO>();
+		for (SachDTO book : sachService.getAllBook(0, (int) sachService.count())) {
+			theloaiSachs.add(book);
+		}
+
 		Object cart = session.getAttribute("cart");
-		
+
 		if (cart != null) {
 			if (khachHangService.search(khachhang.getTenKhachHang(), khachhang.getSoDienThoai(),
 					khachhang.getEmail()) == null) {
@@ -143,10 +166,10 @@ public class CartController {
 				}
 				khachHangService.addKhachHang(khachhang);
 			}
-			
+
 			KhachhangDTO khachHangDTO = khachHangService.search(khachhang.getTenKhachHang(), khachhang.getSoDienThoai(),
 					khachhang.getEmail());
-			System.out.println("Mã khách hàng: "+ khachHangDTO.getMaKhachHang());
+			System.out.println("Mã khách hàng: " + khachHangDTO.getMaKhachHang());
 			Map<Integer, ChitietdonhangDTO> mapCTDHDTO = (Map<Integer, ChitietdonhangDTO>) cart;
 			DonhangDTO donHangDTO = new DonhangDTO();
 			donHangDTO.setKhachHang(khachHangDTO);
