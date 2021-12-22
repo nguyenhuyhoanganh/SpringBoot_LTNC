@@ -119,7 +119,7 @@ public class CartController {
 			Map<Integer, ChitietdonhangDTO> mapCTDHDTO = (Map<Integer, ChitietdonhangDTO>) cart;
 
 			tongSoLuong -= mapCTDHDTO.get(maSach).getSoLuong();
-			tongTien += mapCTDHDTO.get(maSach).getDonGia() * mapCTDHDTO.get(maSach).getSoLuong();
+			tongTien -= mapCTDHDTO.get(maSach).getDonGia() * mapCTDHDTO.get(maSach).getSoLuong();
 			mapCTDHDTO.remove(maSach);
 
 			session.setAttribute("tongSoLuong", tongSoLuong);
