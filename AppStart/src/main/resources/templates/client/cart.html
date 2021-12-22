@@ -40,13 +40,13 @@
 								<div class="cart-list-items">
 									<div class="cart-item d-flex" th:each="entry: ${session.cart}">
 										<a href="product-item.html" class="img"> <img
-											src="images/anhsp1.jpg" class="img-fluid" alt="anhsp1">
+											th:src="@{'/download?image='+${entry.value.sach.getHinhAnh()}}" class="img-fluid" >
 										</a>
 										<div class="item-caption d-flex w-100">
 											<div class="item-info ml-3">
 												<a href="product-item.html" class="ten">[[${entry.value.sach.tenSach}]]</a>
 												<div class="soluong d-flex">
-													<span>Số lượng: [[${entry.value.soLuong }]]</span>
+													<span>Số lượng: [[${entry.value.soLuong}]]</span>
 													<div class="input-number input-group mb-3">
 														<!-- <div class="input-group-prepend">
                                                         <span class="input-group-text btn-spin btn-dec">-</span>
@@ -60,7 +60,7 @@
 											</div>
 											<div
 												class="item-price ml-auto d-flex flex-column align-items-end">
-												<div class="giamoi" style="padding-right: 0;">[[${entry.value.donGia
+												<div class="giamoi" style="padding-right: 0;">[[${entry.value.donGiaS
 													}]] VNĐ</div>
 												<!-- <div class="giacu">139.000 ₫</div> -->
 												<a th:href="@{'/xoa-san-pham?maSach='+${entry.key}}"
@@ -79,7 +79,7 @@
 										<div class="tonggiatien">
 											<div class="group d-flex justify-content-between">
 												<p class="label">Tạm tính:</p>
-												<p class="tamtinh">328.000 ₫</p>
+												<p class="tamtinh">[[${session.tongTienS}]] ₫</p>
 											</div>
 											<div class="group d-flex justify-content-between">
 												<p class="label">Giảm giá:</p>
@@ -96,7 +96,7 @@
 											<div
 												class="group d-flex justify-content-between align-items-center">
 												<strong class="text-uppercase">Tổng cộng:</strong>
-												<p class="tongcong">10000 ₫</p>
+												<p class="tongcong">[[${session.tongTienS}]] ₫</p>
 											</div>
 											<small class="note d-flex justify-content-end text-muted">
 												(Giá đã bao gồm VAT) </small>
@@ -248,33 +248,38 @@
 									</div>
 									<div >
 										<div class="card-body">
-											<form class="form-diachigiaohang">
+							
+											<form class="form-diachigiaohang" th:action="@{/gio-hang}" th:object="${Khachang}" method="POST">
 												<div class="form-label-group">
-													<input type="text" id="inputName" class="form-control"
-														placeholder="Nhập họ và tên" name="name" required
-														autofocus>
+													<input type="text" th:field="*{tenKhachHang}" id="tenKhachHang" class="form-control"
+														placeholder="Nhập họ và tên" name="name">
+													<span class="text-danger" th:errors="*{tenKhachHang}"></span>
 												</div>
 												<div class="form-label-group">
-													<input type="text" id="inputPhone" class="form-control"
-														placeholder="Nhập số điện thoại" name="phone" required>
+													<input type="text" th:field="*{soDienThoai}" id="inputPhone" class="form-control"
+														placeholder="Nhập số điện thoại" name="soDienThoai">
+													<span class="text-danger" th:errors="*{soDienThoai}"></span>
 												</div>
 												<div class="form-label-group">
-													<input type="email" id="inputEmail" class="form-control"
-														placeholder="Nhập địa chỉ email" name="email" required>
+													<input type="email" th:field="*{email}" id="inputEmail" class="form-control"
+														placeholder="Nhập địa chỉ email" name="email">
+													<span class="text-danger" th:errors="*{email}"></span>
 												</div>
 												<div class="form-label-group">
-													<input type="text" id="inputAddress" class="form-control"
-														placeholder="Nhập Địa chỉ giao hàng" name="address"
-														required>
+													<input type="text" th:field="*{diaChi}" id="inputAddress" class="form-control"
+														placeholder="Nhập Địa chỉ giao hàng" name="diaChi">
+													<span class="text-danger" th:errors="*{diaChi}"></span>	
 												</div>
-												<div class="form-label-group">
+												<!-- <div class="form-label-group">
 													<textarea type="text" id="inputNote" class="form-control"
 														placeholder="Nhập ghi chú (Nếu có)" name="note"></textarea>
-												</div>
+												</div> -->
 												<button
 												class="btn btn-lg btn-block btn-checkout text-uppercase text-white"
 												style="background: #F5A623" type="submit">Đặt mua</button>
 											</form>
+											
+											
 										</div>
 									</div>
 								</div>

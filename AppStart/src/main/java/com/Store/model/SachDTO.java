@@ -16,6 +16,7 @@ public class SachDTO {
 	private int soLuongMua;
 	private int soLuongTon;
 	private String tenSach;
+	private String donGiaS;
 	List<MultipartFile> imagefiles;
 
 	private NhommuaDTO nhomMua;
@@ -134,6 +135,14 @@ public class SachDTO {
 
 	public void setTenTheLoai(String tenTheLoai) {
 		this.tenTheLoai = tenTheLoai;
+	}
+
+	public String getDonGiaS() {
+		return donGiaS;
+	}
+
+	public void setDonGiaS(String donGiaS) {
+		this.donGiaS = donGiaS;
 	}
 
 	public SachDTO(int maSach, long donGia, String hinhAnh, String hinhAnh2, String hinhAnh3, String moTa,

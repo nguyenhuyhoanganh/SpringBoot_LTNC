@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.Store.entity.Donhang;
+import com.Store.entity.Khachhang;
 
 public interface DonHangRepository extends JpaRepository<Donhang, Integer>{
 
@@ -16,4 +17,5 @@ public interface DonHangRepository extends JpaRepository<Donhang, Integer>{
 			+ "AND dh.tinhTrangGiaoHang like:tinhtrang AND dh.ngayDat > :ngaydat )")
 	public List<Donhang> search(@Param("tenkhachhang") String tenkhachhang, @Param("tinhtrang") String tinhtrang,
 			 @Param("ngaydat") Date ngaydat, Pageable page);
+
 }

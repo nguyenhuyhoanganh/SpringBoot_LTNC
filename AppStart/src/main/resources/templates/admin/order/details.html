@@ -4,7 +4,8 @@
 	layout:decorator="admin/common/templateAdmin">
 <head>
 <meta charset="UTF-8" />
-<link th:href="@{/templateAdmin/css/multiple-image-preview.css}" rel="stylesheet" />
+<link th:href="@{/templateAdmin/css/multiple-image-preview.css}"
+	rel="stylesheet" />
 <link th:href="@{/css/pagination.css}" rel="stylesheet" />
 <title>Thông tin đơn hàng</title>
 <style>
@@ -42,7 +43,13 @@
 						<div class="col-8">
 							<p class="customer-field" style="margin: 0; text-align: left">ID
 								Thành Viên</p>
-							<span class="customer-value">[[${donhang.getKhachHang().getThanhVien().getMaThanhVien()}]]</span>
+
+							<span
+								th:if="${donhang.getKhachHang().getThanhVien().getMaThanhVien()} != 0"
+								class="customer-value">[[${donhang.getKhachHang().getThanhVien().getMaThanhVien()}]]</span>
+							<span
+								th:if="${donhang.getKhachHang().getThanhVien().getMaThanhVien()} == 0"
+								class="customer-value">Chưa có tài khoản</span>
 						</div>
 					</div>
 					<hr />
@@ -122,7 +129,8 @@
 						<div class="col-8">
 							<p class="customer-field" style="margin: 0; text-align: left">Ngày
 								giao</p>
-							<span class="customer-value">[[${donhang.ngayGiao}]]</span>
+							<span th:if="${donhang.ngayGiao} != null" class="customer-value">[[${donhang.ngayGiao}]]</span>
+							<span th:if="${donhang.ngayGiao} == null" class="customer-value">Chưa được giao hàng</span>
 						</div>
 					</div>
 					<hr />
@@ -148,10 +156,9 @@
 							<p class="customer-field" style="margin: 0; text-align: left">Thanh
 								toán</p>
 							<span class="customer-value"
-								th:if="${donhang?.daThanhToan} == true">Đã thanh toán</span>
-							<span class="customer-value"
-								th:if="${donhang?.daThanhToan} == false">Chưa thanh
-								toán</span>
+								th:if="${donhang?.daThanhToan} == true">Đã thanh toán</span> <span
+								class="customer-value" th:if="${donhang?.daThanhToan} == false">Chưa
+								thanh toán</span>
 						</div>
 					</div>
 					<hr />

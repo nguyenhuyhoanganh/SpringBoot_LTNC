@@ -5,7 +5,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -38,39 +37,36 @@ public class DonHangServiceImpl implements DonHangService {
 	@Override
 	public void addDonHang(DonhangDTO donhangDTO) {
 		Donhang donhang = new Donhang();
-		
+
 		donhang.setMaDonHang(donhangDTO.getMaDonHang());
 		donhang.setNgayDat(donhangDTO.getNgayDat());
 		donhang.setNgayGiao(donhangDTO.getNgayGiao());
 		donhang.setDaThanhToan(donhangDTO.getDaThanhToan());
 		donhang.setTinhTrangGiaoHang(donhangDTO.getTinhTrangGiaoHang());
 		donhang.setUuDai(donhangDTO.getUuDai());
-		
-		 /*
-		List<ChitietdonhangDTO> listCTDHDTO = donhangDTO.getChiTietDonHang();
-		List<Chitietdonhang> listCTDH = new ArrayList<Chitietdonhang>();
-		for(ChitietdonhangDTO CTDHDTO : listCTDHDTO) {
-			// có cần chi tiết không ?, chi tiết tạo sau đơn hàng
-			Chitietdonhang CTDH = chiTietDonHangRepository.getById(CTDHDTO.getMaChiTietDDH());	
-			listCTDH.add(CTDH);
-		}
-		donhang.setChiTietDonHangs(listCTDH); 
-		*/
-		
+
+		/*
+		 * List<ChitietdonhangDTO> listCTDHDTO = donhangDTO.getChiTietDonHang();
+		 * List<Chitietdonhang> listCTDH = new ArrayList<Chitietdonhang>();
+		 * for(ChitietdonhangDTO CTDHDTO : listCTDHDTO) { // có cần chi tiết không ?,
+		 * chi tiết tạo sau đơn hàng Chitietdonhang CTDH =
+		 * chiTietDonHangRepository.getById(CTDHDTO.getMaChiTietDDH());
+		 * listCTDH.add(CTDH); } donhang.setChiTietDonHangs(listCTDH);
+		 */
+
 		KhachhangDTO khachHangDTO = donhangDTO.getKhachHang();
 		Khachhang khachHang = khachHangRepository.getById(khachHangDTO.getMaKhachHang());
 		donhang.setKhachhang(khachHang);
-		
+
 		donHangRepository.save(donhang);
 	}
 
 	@Override
 	public void updateDonHang(DonhangDTO donhangDTO) {
-		// khách hàng -> đơn hàng -> chi tiết <- sách  
+		// khách hàng -> đơn hàng -> chi tiết <- sách
 		// người dùng được sửa ngày đặt, chi tiết
 		// admin được sửa tình trạng, thanh toán, ngày giao
-		
-		
+
 	}
 
 	@Override
@@ -82,7 +78,7 @@ public class DonHangServiceImpl implements DonHangService {
 	public DonhangDTO getDonHangByID(int maDonhangDTO) {
 		Donhang donHang = donHangRepository.getById(maDonhangDTO);
 		DonhangDTO donHangDTO = new DonhangDTO();
-		
+
 		donHangDTO.setDaThanhToan(donHang.getDaThanhToan());
 		donHangDTO.setMaDonHang(donHang.getMaDonHang());
 		donHangDTO.setNgayDat(donHang.getNgayDat());
@@ -97,27 +93,32 @@ public class DonHangServiceImpl implements DonHangService {
 		khachHangDTO.setDiaChi(khachHang.getDiaChi());
 		khachHangDTO.setEmail(khachHang.getEmail());
 		khachHangDTO.setSoDienThoai(khachHang.getSoDienThoai());
-		
-		Thanhvien thanhVien = khachHang.getThanhvien();
-		ThanhvienDTO thanhVienDTO = new ThanhvienDTO();
-		thanhVienDTO.setMaThanhVien(thanhVien.getMaThanhVien());
-		
-		khachHangDTO.setThanhVien(thanhVienDTO);
-		donHangDTO.setKhachHang(khachHangDTO);
 
-		List<Chitietdonhang> listChiTietDonHang = donHang.getChiTietDonHangs();
-		List<ChitietdonhangDTO> listChiTietDonHangDTO = new ArrayList<ChitietdonhangDTO>();
-		for (Chitietdonhang CTDH : listChiTietDonHang) {
-			ChitietdonhangDTO CTDHDTO = new ChitietdonhangDTO();
-			CTDHDTO.setDonGia(CTDH.getDonGia());
-			CTDHDTO.setMaChiTietDDH(CTDH.getMaChiTietDDH());
-			CTDHDTO.setSoLuong(CTDH.getSoLuong());
-			CTDHDTO.setTenSach(CTDH.getTenSach());
+		if (khachHang.getThanhvien() != null) {
+			Thanhvien thanhVien = khachHang.getThanhvien();
+			ThanhvienDTO thanhVienDTO = new ThanhvienDTO();
+			thanhVienDTO.setMaThanhVien(thanhVien.getMaThanhVien());
 
-			listChiTietDonHangDTO.add(CTDHDTO);
+			khachHangDTO.setThanhVien(thanhVienDTO);
 		}
 
-		donHangDTO.setChiTietDonHang(listChiTietDonHangDTO);
+		donHangDTO.setKhachHang(khachHangDTO);
+
+		if (donHang.getChiTietDonHangs() != null) {
+			List<Chitietdonhang> listChiTietDonHang = donHang.getChiTietDonHangs();
+			List<ChitietdonhangDTO> listChiTietDonHangDTO = new ArrayList<ChitietdonhangDTO>();
+			for (Chitietdonhang CTDH : listChiTietDonHang) {
+				ChitietdonhangDTO CTDHDTO = new ChitietdonhangDTO();
+				CTDHDTO.setDonGia(CTDH.getDonGia());
+				CTDHDTO.setMaChiTietDDH(CTDH.getMaChiTietDDH());
+				CTDHDTO.setSoLuong(CTDH.getSoLuong());
+				CTDHDTO.setTenSach(CTDH.getTenSach());
+
+				listChiTietDonHangDTO.add(CTDHDTO);
+			}
+
+			donHangDTO.setChiTietDonHang(listChiTietDonHangDTO);
+		}
 		return donHangDTO;
 	}
 
@@ -133,14 +134,16 @@ public class DonHangServiceImpl implements DonHangService {
 	}
 
 	@Override
-	public List<DonhangDTO> search(String tenkhachhang, String tringtrang, String ngaydat, int currentPage, int size) throws ParseException {
+	public List<DonhangDTO> search(String tenkhachhang, String tringtrang, String ngaydat, int currentPage, int size)
+			throws ParseException {
 		List<DonhangDTO> listDonHangDTO = new ArrayList<DonhangDTO>();
-		List<Donhang> listDonHang = donHangRepository.search("%" + tenkhachhang + "%", "%" + tringtrang + "%", new SimpleDateFormat("yyyy-MM-dd").parse(ngaydat),
+		List<Donhang> listDonHang = donHangRepository.search("%" + tenkhachhang + "%", "%" + tringtrang + "%",
+				new SimpleDateFormat("yyyy-MM-dd").parse(ngaydat),
 				PageRequest.of(currentPage, size, Sort.by("maDonHang")));
 
 		for (Donhang donHang : listDonHang) {
 			DonhangDTO donHangDTO = new DonhangDTO();
-			
+
 			donHangDTO.setDaThanhToan(donHang.getDaThanhToan());
 			donHangDTO.setMaDonHang(donHang.getMaDonHang());
 			donHangDTO.setNgayDat(donHang.getNgayDat());
@@ -175,6 +178,22 @@ public class DonHangServiceImpl implements DonHangService {
 		}
 
 		return listDonHangDTO;
+	}
+
+	@Override
+	public DonhangDTO getLastDonHang() {
+		List<Donhang> listDonHang = donHangRepository.findAll(Sort.by("maDonHang").descending());
+		Donhang donHang = listDonHang.get(0);
+		DonhangDTO donHangDTO = new DonhangDTO();
+
+		donHangDTO.setDaThanhToan(donHang.getDaThanhToan());
+		donHangDTO.setMaDonHang(donHang.getMaDonHang());
+		donHangDTO.setNgayDat(donHang.getNgayDat());
+		donHangDTO.setNgayGiao(donHang.getNgayGiao());
+		donHangDTO.setTinhTrangGiaoHang(donHang.getTinhTrangGiaoHang());
+		donHangDTO.setUuDai(donHang.getUuDai());
+
+		return donHangDTO;
 	}
 
 }

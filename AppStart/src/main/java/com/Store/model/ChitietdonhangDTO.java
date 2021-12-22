@@ -7,6 +7,9 @@ public class ChitietdonhangDTO {
 	private String tenSach;
 	private DonhangDTO donHang;
 	private SachDTO sach;
+	private String donGiaS;
+	
+	
 	public int getMaChiTietDDH() {
 		return maChiTietDDH;
 	}
@@ -43,12 +46,21 @@ public class ChitietdonhangDTO {
 	public void setSach(SachDTO sach) {
 		this.sach = sach;
 	}
-	public ChitietdonhangDTO(int maChiTietDDH, long donGia, int soLuong, String tenSach) {
+	
+	
+	public String getDonGiaS() {
+		return donGiaS;
+	}
+	public void setDonGiaS(String donGiaS) {
+		this.donGiaS = donGiaS;
+	}
+	public ChitietdonhangDTO(int maChiTietDDH, long donGia, int soLuong, String tenSach, String donGiaS) {
 		super();
 		this.maChiTietDDH = maChiTietDDH;
 		this.donGia = donGia;
 		this.soLuong = soLuong;
 		this.tenSach = tenSach;
+		this.donGiaS = donGiaS;
 		this.donHang = new DonhangDTO();
 		this.sach = new SachDTO();
 	}

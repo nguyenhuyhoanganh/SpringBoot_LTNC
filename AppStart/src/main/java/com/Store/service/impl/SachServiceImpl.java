@@ -1,7 +1,9 @@
 package com.Store.service.impl;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -107,7 +109,8 @@ public class SachServiceImpl implements SachService {
 		bookDTO.setMoTa(book.getMoTa());
 		bookDTO.setSoLuongTon(book.getSoLuongTon());
 		bookDTO.setSoLuongMua(book.getSoLuongMua());
-
+		bookDTO.setDonGiaS(formatAmount(book.getDonGia()));
+		
 		TheloaiDTO genreDTO = new TheloaiDTO();
 		genreDTO.setMaTheLoai(book.getTheloai().getMaTheLoai());
 		genreDTO.setTenTheLoai(book.getTheloai().getTenTheLoai());
@@ -144,7 +147,8 @@ public class SachServiceImpl implements SachService {
 			bookDTO.setMoTa(book.getMoTa());
 			bookDTO.setSoLuongTon(book.getSoLuongTon());
 			bookDTO.setSoLuongMua(book.getSoLuongMua());
-
+			bookDTO.setDonGiaS(formatAmount(book.getDonGia()));
+			
 			TheloaiDTO genreDTO = new TheloaiDTO();
 			genreDTO.setMaTheLoai(book.getTheloai().getMaTheLoai());
 			genreDTO.setTenTheLoai(book.getTheloai().getTenTheLoai());
@@ -188,7 +192,8 @@ public class SachServiceImpl implements SachService {
 			dto.setMoTa(sach.getMoTa());
 			dto.setSoLuongTon(sach.getSoLuongTon());
 			dto.setSoLuongMua(sach.getSoLuongMua());
-
+			dto.setDonGiaS(formatAmount(sach.getDonGia()));
+			
 			TheloaiDTO genreDTO = new TheloaiDTO();
 			genreDTO.setMaTheLoai(sach.getTheloai().getMaTheLoai());
 			genreDTO.setTenTheLoai(sach.getTheloai().getTenTheLoai());
@@ -212,6 +217,12 @@ public class SachServiceImpl implements SachService {
 	@Override
 	public long count() {
 		return sachRepository.count();
+	}
+	
+	public String formatAmount (long amount) {
+		Locale vn = new Locale("vn", "VN");
+		NumberFormat dollarFormat = NumberFormat.getCurrencyInstance(vn);
+		return dollarFormat.format(amount).substring(2);
 	}
 
 }

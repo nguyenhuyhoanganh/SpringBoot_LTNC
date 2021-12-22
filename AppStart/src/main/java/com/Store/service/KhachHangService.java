@@ -19,5 +19,6 @@ public interface KhachHangService {
 	
 	public List<KhachhangDTO> search(String tenKhachhangDTO, int currentPage, int size);
 	
+	public KhachhangDTO search(String tenKhachhangDTO, String soDienThoai, String email);
 	long count();
 }

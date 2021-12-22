@@ -73,10 +73,12 @@ public class DonHangController {
 				return "admin/order/listoders";
 	}
 
+	
 	@GetMapping(value = "/thong-tin-don-hang/{id}")
 	public String detailsUser(HttpServletRequest req, @PathVariable(name = "id") int id) {
 		req.setAttribute("donhang", donHangService.getDonHangByID(id));
 		req.setAttribute("chitiets", donHangService.getDonHangByID(id).getChiTietDonHang());
+		
 		for(ChitietdonhangDTO chitiet : donHangService.getDonHangByID(id).getChiTietDonHang()) {
 			System.out.println("Tên: "+ chitiet.getTenSach());
 			System.out.println("Đơn Giá: "+ chitiet.getDonGia());
