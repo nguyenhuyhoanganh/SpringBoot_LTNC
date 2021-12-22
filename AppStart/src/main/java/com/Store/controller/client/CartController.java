@@ -132,6 +132,7 @@ public class CartController {
 	public String addOrder(HttpServletRequest req, HttpSession session,
 			@ModelAttribute("Khachang") KhachhangDTO khachhang, BindingResult bindingResult){
 		Object cart = session.getAttribute("cart");
+		
 		if (cart != null) {
 			if (khachHangService.search(khachhang.getTenKhachHang(), khachhang.getSoDienThoai(),
 					khachhang.getEmail()) == null) {
@@ -142,8 +143,10 @@ public class CartController {
 				}
 				khachHangService.addKhachHang(khachhang);
 			}
+			
 			KhachhangDTO khachHangDTO = khachHangService.search(khachhang.getTenKhachHang(), khachhang.getSoDienThoai(),
 					khachhang.getEmail());
+			System.out.println("Mã khách hàng: "+ khachHangDTO.getMaKhachHang());
 			Map<Integer, ChitietdonhangDTO> mapCTDHDTO = (Map<Integer, ChitietdonhangDTO>) cart;
 			DonhangDTO donHangDTO = new DonhangDTO();
 			donHangDTO.setKhachHang(khachHangDTO);
@@ -169,7 +172,7 @@ public class CartController {
 			session.setAttribute("Khachhang", khachHangDTO);
 		}
 		session.removeAttribute("cart");
-		session.removeAttribute("tongSoLuong");
+		session.setAttribute("tongSoLuong", 0);
 		session.removeAttribute("tongTien");
 		session.removeAttribute("tongTienS");
 		return "redirect:/gio-hang";

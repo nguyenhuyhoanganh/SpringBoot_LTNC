@@ -119,17 +119,17 @@ public class KhachHangServiceImpl implements KhachHangService {
 	@Override
 	public KhachhangDTO search(String tenKhachhangDTO, String soDienThoai, String email) {
 		Khachhang khachHang = khachHangRepository.search(tenKhachhangDTO, email, soDienThoai);
-		System.out.println(0);
 		KhachhangDTO khachHangDTO = new KhachhangDTO();
-		System.out.println(1);
+		if(khachHang != null) {
 		khachHangDTO.setMaKhachHang(khachHang.getMaKhachHang());
-		System.out.println(2);
 		khachHangDTO.setTenKhachHang(khachHang.getTenKhachHang());
 		khachHangDTO.setDiaChi(khachHang.getDiaChi());
 		khachHangDTO.setEmail(khachHang.getEmail());
 		khachHangDTO.setSoDienThoai(khachHang.getSoDienThoai());
 		
 		return khachHangDTO;
+		}
+		return null;
 	}
 
 }
