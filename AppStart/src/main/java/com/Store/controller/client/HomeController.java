@@ -95,7 +95,7 @@ public class HomeController {
 		String theloai = req.getParameter("theloai") == null ? "" : req.getParameter("theloai");
 		String nhommua = req.getParameter("nhommua") == null ? "" : req.getParameter("nhommua");
 
-		int size = 4;
+		int size = 12;
 		int totalData = sachService.search(tensach, theloai, "", nhommua, 0, 1000000, 0, (int) sachService.count())
 				.size();
 		int totalPage = totalData < 1 ? 1
