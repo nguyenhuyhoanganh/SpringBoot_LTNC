@@ -136,13 +136,14 @@ public class HomeController {
 		return "client/search";
 	}
 
-	@GetMapping(value = "/san-pham/{bookId}")
-	public String deletesBook(HttpServletRequest req, @PathVariable(name = "bookId") int bookId, HttpSession session) {
+	@GetMapping(value = "/san-pham")
+	public String deletesBook(HttpServletRequest req, HttpSession session) {
 		// get cart in session
+		int masach = req.getParameter("masach") == null ? 0 : Integer.parseInt(req.getParameter("masach"));
 		Object cart = session.getAttribute("cart");
 		Map<Integer, ChitietdonhangDTO> mapCTDHDTO = (Map<Integer, ChitietdonhangDTO>) cart;
 		if(mapCTDHDTO != null) {
-			ChitietdonhangDTO CTDHDTO = mapCTDHDTO.get(bookId);
+			ChitietdonhangDTO CTDHDTO = mapCTDHDTO.get(masach);
 			if(CTDHDTO != null)
 			req.setAttribute("soLuong", CTDHDTO.getSoLuong());
 			else req.setAttribute("soLuong", 1);
@@ -160,8 +161,8 @@ public class HomeController {
 			theloaiSachs.add(book);
 		}
 		req.setAttribute("theloais", theloaiSachs);
-		req.setAttribute("masach", bookId);
-		req.setAttribute("sach", sachService.getBookById(bookId));
+		req.setAttribute("masach", masach);
+		req.setAttribute("sach", sachService.getBookById(masach));
 		
 		int tongSoLuong = session.getAttribute("tongSoLuong") == null ? 0 : (int) session.getAttribute("tongSoLuong");
 		session.setAttribute("tongSoLuong", tongSoLuong);
