@@ -108,9 +108,9 @@
 							<tr>
 								<th>Mã Sách</th>
 								<th>Tên Sách</th>
-								<th>Ảnh 1</th>
-								<th>Ảnh 2</th>
-								<th>Ảnh 3</th>
+								<th>Ảnh bìa</th>
+								<!-- <th>Ảnh 2</th>
+								<th>Ảnh 3</th> -->
 								<th>Đơn Giá</th>
 								<th>Số Lượng Tồn</th>
 								<th>Số Lượng Mua</th>
@@ -126,19 +126,19 @@
 								<td><img
 									th:src="@{'/download?image='+${book.getHinhAnh()}}"
 									style="width: 100px; height: 50px;"></td>
-								<td><img
+								<!-- <td><img
 									th:src="@{'/download?image='+${book.getHinhAnh2()}}" th:if="${book.getHinhAnh2()} != null"
 									style="width: 100px; height: 50px;"></td>
 								<td><img
 									th:src="@{'/download?image='+${book.getHinhAnh3()}}" th:if="${book.getHinhAnh3()} != null"
-									style="width: 100px; height: 50px;"></td>
+									style="width: 100px; height: 50px;"></td> -->
 								<td th:text="${book.donGia}"></td>
 								<td th:text="${book.soLuongTon}"></td>
 								<td th:text="${book.soLuongMua}"></td>
 								<td th:text="${book.theLoai.tenTheLoai}"></td>
 								<td th:text="${book.nhomMua.tenNhom}"></td>
 								<td th:text="${book.nhaXuatBan.tenNhaXuatBan}"></td>
-								<td><a
+								<td colspan="2"><a
 									th:href="@{'/admin/san-pham/sua-san-pham?maSach='+${book.maSach}}"><i
 										class="far fa-edit edit-icon"></i></a> <a href="#"
 									data-bs-toggle="modal"
